@@ -1,0 +1,3127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" type="image/webp" data-hatch-href="assets/loona-education-logo-ribbon.webp" />
+<title>Loona Education — AI Teachers Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#edf2f9; --card:#ffffff; --card-2:#f2f6fc; --ink:#152a42; --ink-2:#33506e;
+  --muted:#5f748e; --line:#d5e0ee; --blue:#1d5fd1; --blue-dark:#174a9e; --blue-soft:#dce9fb;
+  --orange:#f5821f; --orange-soft:#fff1e0; --green:#17936a; --green-soft:#e2f4ec;
+  --yellow:#fff6d6; --yellow-line:#f0df9a; --yellow-ink:#7a5b00;
+  --lav:#efeafd; --lav-ink:#5b4a9e; --red:#d64545; --red-soft:#fdecec;
+  --shadow:0 1px 3px rgba(21,38,57,.07),0 8px 24px rgba(21,38,57,.05);
+  --radius:16px;
+}
+body.dark{
+  --bg:#0a1420; --card:#111f31; --card-2:#182a40; --ink:#e9f1fa; --ink-2:#c2d4e8;
+  --muted:#8fa6bf; --line:#22384f; --blue:#5b9cf5; --blue-dark:#9cc4ff; --blue-soft:#152e4d;
+  --orange:#ffa04d; --orange-soft:#3a2a16; --green:#3ec48f; --green-soft:#143327;
+  --yellow:#332d12; --yellow-line:#5c5220; --yellow-ink:#ecd97e;
+  --lav:#2b2447; --lav-ink:#c3b6f2; --red:#ff7a7a; --red-soft:#3d1d1d;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Manrope",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5}
+h1,h2,h3,h4{font-family:"Sora",sans-serif;margin:0;line-height:1.25}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:14px;color:var(--ink)}
+a{color:var(--blue)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* ---------- Layout ---------- */
+.shell{display:flex;min-height:100vh}
+.sidebar{width:248px;flex:0 0 248px;background:var(--card);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:20px 14px;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:40}
+.brand{display:flex;align-items:center;gap:10px;padding:2px 8px 18px}
+.brand-mark{width:40px;height:40px;border-radius:11px;background:var(--blue);display:grid;place-items:center;color:#fff;flex:0 0 40px}
+.brand-logo{height:58px;width:auto;flex:0 0 auto}
+.top-logo{display:none;height:44px;width:auto}
+.brand b{font-family:"Sora",sans-serif;font-size:17px;display:block;line-height:1.15}
+.brand span{font-size:11.5px;color:var(--muted);font-weight:600}
+.nav{display:flex;flex-direction:column;gap:3px}
+.nav button{display:flex;align-items:center;gap:11px;padding:10px 12px;border:0;border-radius:10px;background:transparent;color:var(--ink-2);font-size:14px;font-weight:600;text-align:left;width:100%}
+.nav button svg{flex:0 0 18px;opacity:.75}
+.nav button:hover{background:var(--card-2)}
+.nav button.active{background:var(--blue-soft);color:var(--blue-dark)}
+.nav button.active svg{opacity:1}
+.side-foot{margin-top:auto;padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.btn-premium{background:var(--orange);color:#fff;border:0;border-radius:11px;padding:11px;font-weight:800;font-size:14px;width:100%}
+.btn-ghost{background:var(--card-2);border:1px solid var(--line);color:var(--ink-2);border-radius:11px;padding:10px;font-weight:700;font-size:13.5px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-logout{background:transparent;border:0;color:var(--red);font-weight:700;font-size:13.5px;padding:8px}
+.main{flex:1;min-width:0;padding:0 26px 48px}
+.topbar{display:flex;align-items:center;gap:14px;padding:18px 0 14px;position:sticky;top:0;background:var(--bg);z-index:30}
+.topbar h1{font-size:21px}
+.hamburger{display:none;background:var(--card);border:1px solid var(--line);border-radius:10px;width:40px;height:40px;place-items:center;color:var(--ink)}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.att-pill{background:var(--blue);color:#fff;border:0;border-radius:999px;padding:8px 16px;font-weight:800;font-size:13px}
+.att-pill:hover{background:var(--blue-dark)}
+.user-chip{display:flex;align-items:center;gap:10px}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;font-family:"Sora",sans-serif}
+.user-chip b{display:block;font-size:13.5px;line-height:1.2}
+.user-chip span{font-size:12px;color:var(--muted);font-weight:600}
+
+/* ---------- Cards & dashboard ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+.premium-banner{background:linear-gradient(90deg,#174a9e,#1d5fd1);color:#fff;border-radius:var(--radius);padding:14px 20px;font-weight:700;display:flex;gap:10px;align-items:center;margin-bottom:18px;box-shadow:var(--shadow)}
+.dash-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 302px;gap:18px;align-items:start;margin-bottom:18px}
+.card h3{font-size:16px;display:flex;align-items:center;gap:8px}
+.badge-premium{background:var(--orange-soft);color:var(--orange);font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;letter-spacing:.03em}
+.tabs{display:flex;gap:6px;margin:14px 0 6px}
+.tabs button{border:1px solid var(--line);background:var(--card-2);color:var(--ink-2);border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px}
+.tabs button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.progress-wrap{display:flex;align-items:center;gap:20px;margin-top:10px}
+.ring{position:relative;width:128px;height:128px;flex:0 0 128px}
+.ring svg{transform:rotate(-90deg)}
+.ring .ring-num{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ring-num b{font-family:"Sora",sans-serif;font-size:26px;display:block;line-height:1}
+.ring-num span{font-size:11.5px;color:var(--muted);font-weight:700}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1}
+.stat{background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.stat b{font-family:"Sora",sans-serif;font-size:19px;display:block;line-height:1.15}
+.stat span{font-size:12px;color:var(--muted);font-weight:700}
+.bar-row{margin-top:14px}
+.bar-row .bar-head{display:flex;justify-content:space-between;font-size:13px;font-weight:700}
+.bar-row .bar-head span{color:var(--muted);font-weight:600}
+.bar{height:10px;background:var(--card-2);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--blue);border-radius:999px}
+.bar i.green{background:var(--green)}
+.insight{background:var(--blue-soft);border-radius:12px;padding:12px 14px;margin-top:16px;font-size:13.5px}
+.insight b{color:var(--blue-dark)}
+
+/* AI Assistant — compact in-flow card (Rehan-size) */
+.assistant{padding:16px}
+.assistant-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.assistant-head .bot{width:32px;height:32px;border-radius:9px;background:var(--blue);color:#fff;display:grid;place-items:center;flex:0 0 32px}
+.assistant-head h3{font-size:14.5px}
+.assistant-head .live{margin-left:auto;font-size:11px;font-weight:800;color:var(--green);display:flex;align-items:center;gap:5px}
+.assistant-head .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+.assistant-msgs{height:118px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;padding-right:2px}
+.msg{font-size:13px;padding:8px 11px;border-radius:12px;max-width:92%;line-height:1.45}
+.msg.bot{background:var(--card-2);border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start}
+.msg.user{background:var(--blue);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chips button{border:1px solid var(--line);background:var(--card);color:var(--blue-dark);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:700}
+.chips button:hover{background:var(--blue-soft)}
+.assistant-form{display:flex;gap:8px}
+.assistant-form input{flex:1;border:1px solid var(--line);background:var(--card-2);border-radius:999px;padding:9px 14px;min-width:0}
+.send-btn{width:38px;height:38px;flex:0 0 38px;border-radius:50%;border:0;background:var(--blue);color:#fff;display:grid;place-items:center}
+
+/* Task picker + list */
+.section-card{margin-bottom:18px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.filters select{border:1px solid var(--line);background:var(--card-2);border-radius:10px;padding:10px 12px;font-weight:600;flex:1;min-width:150px}
+.btn-go{background:#f5b81f;color:#231a00;border:0;border-radius:10px;padding:10px 22px;font-weight:800;font-size:14px}
+.count-badges{display:flex;gap:8px;flex-wrap:wrap}
+.count-badges span{font-size:12px;font-weight:800;padding:5px 12px;border-radius:999px}
+.cb-approved{background:var(--green-soft);color:var(--green)}
+.cb-pending{background:var(--orange-soft);color:var(--orange)}
+.task-list{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.task{display:flex;gap:0;border:1px solid var(--line);border-radius:13px;overflow:hidden;background:var(--card)}
+.task .stripe{width:5px;flex:0 0 5px}
+.task .body{padding:13px 16px;flex:1;min-width:0}
+.task .t-top{display:flex;gap:10px;align-items:flex-start}
+.task h4{font-size:14.5px;flex:1}
+.status{font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.st-approved{background:var(--green-soft);color:var(--green)}
+.st-notstarted{background:var(--red-soft);color:var(--red)}
+.st-pending{background:var(--orange-soft);color:var(--orange)}
+.task .cat{color:var(--blue);font-weight:700;font-size:12.5px;margin-top:2px}
+.task p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.reviewer{background:var(--lav);color:var(--lav-ink);border-radius:8px;padding:6px 11px;font-size:12.5px;font-weight:600;margin-top:10px;display:inline-block}
+.task .actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn-outline{border:1px solid var(--blue);color:var(--blue);background:transparent;border-radius:9px;padding:7px 15px;font-weight:700;font-size:13px}
+.btn-submit{background:#f5b81f;color:#231a00;border:0;border-radius:9px;padding:7px 15px;font-weight:800;font-size:13px}
+.empty-note{color:var(--muted);text-align:center;padding:26px 10px;font-weight:600}
+
+/* ---------- Generic sections ---------- */
+.section{display:none}
+.section.active{display:block;animation:fade .18s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sec-head{margin:4px 0 16px}
+.sec-head h2{font-size:20px}
+.sec-head p{color:var(--muted);margin:5px 0 0;max-width:640px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.info-box{background:var(--yellow);border:1px solid var(--yellow-line);color:var(--yellow-ink);border-radius:12px;padding:13px 15px;font-size:13.5px;font-weight:600}
+.btn-primary{background:var(--blue);color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:800;font-size:14px}
+.btn-purple{background:#174a9e;color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:800;font-size:14px}
+label.f{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
+label.f:first-child{margin-top:0}
+.inp{width:100%;border:1px solid var(--line);background:var(--card-2);border-radius:10px;padding:10px 12px}
+textarea.inp{resize:vertical;min-height:84px}
+.big-stat{text-align:center;padding:16px 8px}
+.big-stat b{font-family:"Sora",sans-serif;font-size:26px;display:block}
+.big-stat span{font-size:12.5px;color:var(--muted);font-weight:700}
+.big-stat.o b{color:var(--orange)} .big-stat.g b{color:var(--green)} .big-stat.b b{color:var(--blue)}
+.code-box{display:flex;gap:10px;align-items:center;background:var(--card-2);border:1.5px dashed var(--line);border-radius:12px;padding:13px 15px;margin-top:12px;flex-wrap:wrap}
+.code-box code{font-size:17px;font-weight:800;letter-spacing:.06em;font-family:"Sora",sans-serif}
+.cert-bar-note{font-size:12.5px;color:var(--muted);font-weight:600;margin-top:5px}
+.btn-locked{background:var(--card-2);border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:10px 18px;font-weight:800;font-size:13.5px;width:100%;margin-top:14px;cursor:not-allowed}
+
+/* Help accordion */
+.help-item{border:1px solid var(--line);border-radius:13px;background:var(--card);overflow:hidden}
+.help-item+.help-item{margin-top:10px}
+.help-head{width:100%;background:transparent;border:0;display:flex;gap:12px;align-items:center;padding:14px 16px;text-align:left;color:var(--ink)}
+.help-head .play{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center}
+.help-head b{font-size:14.5px;font-family:"Sora",sans-serif}
+.help-head small{display:block;color:var(--muted);font-weight:600;font-family:"Manrope",sans-serif}
+.help-head .chev{margin-left:auto;color:var(--muted);transition:transform .15s}
+.help-item.open .chev{transform:rotate(180deg)}
+.help-body{display:none;padding:0 16px 16px 62px}
+.help-item.open .help-body{display:block}
+.help-body h5{margin:12px 0 6px;font-size:12px;letter-spacing:.05em;color:var(--blue-dark)}
+.help-body ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:13.5px}
+.check-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.check-chips span{background:var(--green-soft);color:var(--green);font-size:11.5px;font-weight:700;border-radius:999px;padding:4px 10px}
+
+/* Tables */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;color:var(--muted);font-size:12px;letter-spacing:.04em;padding:10px 12px;border-bottom:1px solid var(--line)}
+td{padding:11px 12px;border-bottom:1px solid var(--line);font-weight:600;color:var(--ink-2)}
+tr:last-child td{border-bottom:0}
+.rank-medal{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--card-2);border:1px solid var(--line);font-weight:800;font-size:12.5px}
+.podium{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+.podium .pod{border:1px solid var(--line);border-radius:13px;padding:16px 10px;text-align:center;background:var(--card-2)}
+.podium .pod.first{background:var(--yellow);border-color:var(--yellow-line)}
+.podium b{display:block;font-family:"Sora",sans-serif}
+.podium span{font-size:12px;color:var(--muted);font-weight:700}
+
+/* Donut */
+.donut-wrap{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.legend{display:flex;flex-direction:column;gap:8px;font-size:13.5px;font-weight:700}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block;margin-right:8px}
+.log-filters{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
+.log-filters input,.log-filters select{border:1px solid var(--line);background:var(--card-2);border-radius:9px;padding:9px 11px}
+.log-filters input{flex:1;min-width:160px}
+
+/* Modal */
+.modal-back{position:fixed;inset:0;background:rgba(10,20,35,.55);display:none;place-items:center;z-index:80;padding:16px}
+.modal-back.open{display:grid}
+.modal{background:var(--card);border-radius:18px;max-width:520px;width:100%;max-height:88vh;overflow-y:auto;padding:24px;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.modal h3{font-size:17px;padding-right:30px}
+.modal .x{position:absolute}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between}
+.x-btn{background:var(--card-2);border:1px solid var(--line);width:32px;height:32px;border-radius:9px;font-size:16px;color:var(--ink-2);flex:0 0 32px}
+.meta-chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.meta-chips span{font-size:12px;font-weight:800;border-radius:999px;padding:5px 11px}
+.mc-day{background:var(--blue);color:#fff}.mc-level{background:#f5b81f;color:#231a00}.mc-topic{border:1.5px solid var(--line);color:var(--ink-2)}
+.warn-box{background:var(--yellow);border:1px solid var(--yellow-line);color:var(--yellow-ink);border-radius:10px;padding:11px 13px;font-size:13px;font-weight:600;margin:12px 0}
+.hint{font-size:12px;color:var(--muted);font-weight:600}
+.char-count{font-size:12px;color:var(--muted);text-align:right;font-weight:700}
+.checkline{display:flex;gap:8px;align-items:center;font-size:13.5px;font-weight:600;margin:6px 0}
+.profile-photo{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.profile-photo .avatar{width:56px;height:56px;font-size:19px}
+.btn-small{border:1px solid var(--line);background:var(--card-2);border-radius:9px;padding:7px 13px;font-weight:700;font-size:12.5px;color:var(--ink-2)}
+.btn-yellow{background:#f5b81f;color:#231a00;border:0;border-radius:10px;padding:11px;font-weight:800;width:100%;margin-top:16px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,80px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:12px;font-weight:700;font-size:14px;z-index:120;transition:transform .25s;max-width:92vw;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.toast.show{transform:translate(-50%,0)}
+.scrim{display:none}
+
+/* ---------- Public landing page ---------- */
+.app-hidden{display:none!important}
+.landing{background:#f4f7fb;color:#152639}
+.lp-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);border-bottom:1px solid #dde5ee}
+.lp-header-in{max-width:1160px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
+.lp-brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.lp-brand img{height:54px;width:auto;flex:0 0 auto}
+.lp-brand b{font-family:"Sora",sans-serif;font-size:18px;display:block;line-height:1.1;color:#0b1e5b}
+.lp-brand small{font-size:11px;font-weight:700;color:#63748c;letter-spacing:.05em}
+.lp-nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+.lp-nav a{color:#33465e;text-decoration:none;font-weight:700;font-size:14px}
+.lp-nav a:hover{color:#1463b8}
+.btn-gold{background:#f5b81f;color:#231a00;border:0;border-radius:10px;padding:11px 20px;font-weight:800;font-size:14px}
+.btn-white-o{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.65);border-radius:10px;padding:11px 20px;font-weight:800;font-size:14px}
+.lp-hero{background:#0b1e5b;color:#fff;padding:54px 20px 58px;text-align:center}
+.lp-hero .emblem{width:248px;max-width:74vw;height:auto;filter:drop-shadow(0 16px 30px rgba(0,0,0,.4))}
+.lp-hero h1{font-size:38px;max-width:720px;margin:22px auto 0}
+.lp-hero h1 em{font-style:normal;color:#f5b81f}
+.lp-hero p{max-width:620px;margin:14px auto 0;color:#c9d6ea;font-size:16px}
+.lp-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.lp-note{margin-top:12px;font-size:13px;color:#93a9c9;font-weight:600}
+.lp-stats{max-width:960px;margin:34px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.lp-stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:13px;padding:14px 8px}
+.lp-stat b{font-family:"Sora",sans-serif;font-size:21px;display:block;color:#fff}
+.lp-stat span{font-size:12px;color:#a9bedd;font-weight:700}
+.lp-sec{max-width:1160px;margin:0 auto;padding:50px 20px 6px}
+.lp-sec h2{font-size:26px;color:#0b1e5b;text-align:center}
+.lp-sec .sub{text-align:center;color:#63748c;max-width:640px;margin:8px auto 0}
+.lp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.lp-cards.two{grid-template-columns:1fr 1fr}
+.lp-card{background:#fff;border:1px solid #dde5ee;border-radius:16px;padding:22px;box-shadow:0 1px 3px rgba(21,38,57,.06)}
+.lp-card h3{font-size:16.5px}
+.lp-card p{color:#63748c;font-size:14px;margin:8px 0 0}
+.lp-level{border-top:4px solid #1463b8}
+.lp-level.gold{border-top-color:#f5b81f}
+.lp-level .big{font-family:"Sora",sans-serif;font-size:30px;color:#0b1e5b}
+.lp-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+.lp-step{background:#fff;border:1px solid #dde5ee;border-radius:16px;padding:20px}
+.lp-step .n{width:34px;height:34px;border-radius:50%;background:#0b1e5b;color:#f5b81f;font-family:"Sora",sans-serif;font-weight:800;display:grid;place-items:center}
+.lp-step h3{font-size:15px;margin-top:12px}
+.lp-step p{color:#63748c;font-size:13.5px;margin:6px 0 0}
+.type-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
+.type-chips span{background:#e3eefb;color:#0e4c8f;font-weight:700;font-size:13px;border-radius:999px;padding:7px 14px}
+.lp-founder{background:#fff;border:1px solid #dde5ee;border-radius:16px;padding:28px;display:flex;gap:24px;align-items:center;margin-top:26px;box-shadow:0 1px 3px rgba(21,38,57,.06)}
+.lp-founder .f-avatar{width:148px;height:148px;flex:0 0 148px;border-radius:50%;object-fit:cover;border:3px solid #f5b81f;background:#0b1e5b;box-shadow:0 10px 26px rgba(21,38,57,.22)}
+.lp-founder blockquote{margin:0;font-size:15.5px;color:#33465e;line-height:1.65}
+.lp-founder .who{margin-top:12px;font-weight:800;color:#0b1e5b}
+.lp-founder .who span{display:block;font-weight:600;color:#63748c;font-size:13px}
+.lp-trial{background:#0b1e5b;border-radius:18px;color:#fff;text-align:center;padding:38px 24px;margin-top:26px}
+.lp-trial h2{color:#fff}
+.lp-trial p{color:#c9d6ea;max-width:560px;margin:10px auto 22px}
+.lp-footer{margin-top:56px;background:#081638;color:#a9bedd;padding:28px 20px}
+.lp-footer-in{max-width:1160px;margin:0 auto;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.lp-footer img{height:52px;width:auto}
+.lp-footer b{color:#fff;font-family:"Sora",sans-serif;display:block;line-height:1.2}
+.lp-footer .f-right{margin-left:auto;font-size:13px;font-weight:600;text-align:right}
+
+@media (max-width:1180px){.dash-grid{grid-template-columns:1fr 1fr}.assistant{grid-column:1/-1}}
+@media (max-width:860px){
+  .sidebar{position:fixed;left:0;top:0;transform:translateX(-105%);visibility:hidden;transition:transform .22s,visibility 0s linear .22s;width:262px;flex-basis:262px}
+  .sidebar.open{transform:none;visibility:visible;transition:transform .22s;box-shadow:0 0 60px rgba(0,0,0,.3)}
+  .top-logo{display:block}
+  .scrim{display:block;position:fixed;inset:0;background:rgba(10,20,35,.45);z-index:35;opacity:0;pointer-events:none;transition:opacity .2s}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .hamburger{display:grid}
+  .main{padding:0 14px 40px}
+  .grid-2,.grid-3,.dash-grid{grid-template-columns:1fr}
+  .user-chip .u-meta{display:none}
+  .topbar h1{font-size:18px}
+  .help-body{padding-left:16px}
+  .progress-wrap{flex-wrap:wrap}
+  .lp-nav a{display:none}
+  .lp-hero{padding:40px 16px 44px}
+  .lp-hero h1{font-size:29px}
+  .lp-hero .emblem{width:200px}
+  .lp-stats{grid-template-columns:1fr 1fr}
+  .lp-cards,.lp-cards.two,.lp-steps{grid-template-columns:1fr}
+  .lp-founder{flex-direction:column;padding:22px}
+  .lp-founder .f-avatar{width:118px;height:118px;flex:0 0 118px}
+  .lp-footer .f-right{margin-left:0;text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+  <style data-hatch-cvm-bundle></style>
+</head>
+<body>
+
+<!-- ============ PUBLIC LANDING PAGE ============ -->
+<div class="landing" id="landing">
+  <header class="lp-header">
+    <div class="lp-header-in">
+      <a class="lp-brand" href="#top" aria-label="Loona Education — home">
+        <img data-hatch-src="assets/loona-education-logo-ribbon.webp" alt="Loona Education logo — eagle emblem with graduation cap, open book and name ribbon" />
+        <span><b>Loona Education</b><small>AI TEACHERS INSTITUTE</small></span>
+      </a>
+      <nav class="lp-nav" aria-label="Website">
+        <a href="#program">Program</a>
+        <a href="#how">How It Works</a>
+        <a href="#facilitators">Facilitators</a>
+        <a href="#founder">Founder</a>
+        <button class="btn-gold" data-enter>Student Dashboard →</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="lp-hero" id="top">
+    <img class="emblem" data-hatch-src="assets/loona-education-logo-ribbon.webp" alt="Loona Education logo — eagle emblem with graduation cap and open book over a gold Loona Education ribbon" />
+    <h1>Become an <em>AI-Powered</em> Teacher</h1>
+    <p>Loona Education trains school teachers to master AI tools — through daily hands-on tasks, live evening classes, and facilitators who review every piece of your work.</p>
+    <div class="lp-cta">
+      <button class="btn-gold" data-enter>Start Your 7-Day Free Trial</button>
+      <button class="btn-white-o" data-enter>Open Student Dashboard</button>
+    </div>
+    <div class="lp-note">7-day free trial · No credit card required · Cancel anytime</div>
+    <div class="lp-stats">
+      <div class="lp-stat"><b>452</b><span>Tasks · 2 Levels</span></div>
+      <div class="lp-stat"><b>13</b><span>Practical Task Types</span></div>
+      <div class="lp-stat"><b>Mon–Fri</b><span>Live Evening Classes</span></div>
+      <div class="lp-stat"><b>100%</b><span>Completion = Certificate</span></div>
+    </div>
+  </div>
+
+  <section class="lp-sec">
+    <h2>The Reality Every Teacher Feels</h2>
+    <p class="sub">Teaching has changed — and the teachers who learn AI now will lead the classrooms of tomorrow.</p>
+    <div class="lp-cards">
+      <div class="lp-card"><h3>Hours Lost Every Week</h3><p>Lesson planning, checking, and repetitive paperwork eat the hours a teacher should spend actually teaching. AI tools can give those hours back — if someone shows you how, step by step.</p></div>
+      <div class="lp-card"><h3>The AI Gap Is Growing</h3><p>Schools and students are moving fast. Teachers who cannot use AI risk falling behind — not because they lack talent, but because nobody trained them in a simple, guided way.</p></div>
+      <div class="lp-card"><h3>Your Students Deserve Better</h3><p>An AI-powered teacher plans richer lessons, creates better materials, and gives faster feedback. Your students deserve that teacher — and it can be you.</p></div>
+    </div>
+  </section>
+
+  <section class="lp-sec" id="program">
+    <h2>The Program — Two Levels, Real Skills</h2>
+    <p class="sub">Not video lectures you forget. A task-based system: every day you build something real with AI, publish it, and get it reviewed.</p>
+    <div class="lp-cards two">
+      <div class="lp-card lp-level"><div class="big">Level 1 · Foundation</div><h3 style="margin-top:8px">251 Tasks · 41 Working Days</h3><p>Start from zero: design posts with ChatGPT, create AI songs and stories, hold voice sessions with AI partners, grow your network, record your first interviews and complete 10 guided AI coding projects from Day 15 onward — one approved task at a time. Complete 100% to earn your Level 1 Certificate.</p></div>
+      <div class="lp-card lp-level gold"><div class="big">Level 2 · Advanced</div><h3 style="margin-top:8px">201 Tasks · 41 Working Days</h3><p>Go deeper: longer AI voice sessions, professional interviews, testimonial videos and 25 AI coding projects from Day 10 onward — two and a half times Level 1 — a complete public portfolio that turns your skills into income-ready expertise. Unlocks when Level 1 is complete — certificate at 100%.</p></div>
+    </div>
+    <div class="type-chips">
+      <span>ChatGPT Design Post</span><span>AI Song Maker</span><span>ChatGPT Voice Session</span><span>TEDx Talk Review</span><span>Story Writing Post</span><span>Facebook Mutual Friends</span><span>LinkedIn Mutual Friends</span><span>Video Interview</span><span>Canva Design Post</span><span>Sesame Voice Session</span><span>Copilot Voice Session</span><span>My Testimonial Video</span><span>AI Coding Project</span>
+    </div>
+  </section>
+
+  <section class="lp-sec" id="how">
+    <h2>How It Works</h2>
+    <p class="sub">A simple daily rhythm, built for working teachers — classes are in the evening, after school hours.</p>
+    <div class="lp-steps">
+      <div class="lp-step"><div class="n">1</div><h3>Join the Live Class</h3><p>Online classes run Monday to Friday in the evening, after school hours. Mark your attendance right from your dashboard.</p></div>
+      <div class="lp-step"><div class="n">2</div><h3>Do the Daily Task</h3><p>Pick the day's task in your dashboard. The Help guide shows exactly what to do and how your reviewer will check it.</p></div>
+      <div class="lp-step"><div class="n">3</div><h3>Publish &amp; Submit Links</h3><p>Post your work publicly on Facebook, YouTube or LinkedIn, then submit the links with your post description.</p></div>
+      <div class="lp-step"><div class="n">4</div><h3>Get Reviewed &amp; Certified</h3><p>Your facilitator approves your tasks one by one. Reach 100% of a level and your certificate unlocks.</p></div>
+    </div>
+  </section>
+
+  <section class="lp-sec" id="facilitators">
+    <h2>Meet Your Facilitators</h2>
+    <p class="sub">Real people review your work, answer in class, and walk with you from your first task to your certificate.</p>
+    <div class="lp-cards">
+      <div class="lp-card"><h3>Loona Facilitators</h3><p>Senior Facilitators · AI Tools &amp; Content — guide your technical tasks, posts and stories, and review your progress.</p></div>
+      <div class="lp-card"><h3>Loona Mentors Team</h3><p>Co-Facilitators · Task Review &amp; Support — daily review support so no student's task waits long.</p></div>
+      <div class="lp-card"><h3>Loona Support Team</h3><p>Student Support · Classes &amp; Guidance — answers your questions in class and walks with you to your certificate.</p></div>
+    </div>
+  </section>
+
+  <section class="lp-sec" id="founder">
+    <h2>A Message from the Founder</h2>
+    <div class="lp-founder">
+      <img class="f-avatar" data-hatch-src="assets/founder-avatar.webp" alt="Aurang Zeb Loona, Founder of Loona Education — portrait in a navy suit">
+      <div>
+        <blockquote>"Assalam-o-Alaikum! I am a school teacher myself. I completed my AI teachers training the hard way — one task at a time, late at night after school. I built Loona Education so that teachers like us can learn the same AI skills in a simple, guided way: daily tasks, live evening classes, and a facilitator who actually reviews your work. If I can do it, so can you — bas pehla qadam uthayein."</blockquote>
+        <div class="who">Aurang Zeb Loona<span>Founder, Loona Education · School Teacher (M.Phil Urdu, M.Ed)</span></div>
+      </div>
+    </div>
+    <div class="lp-trial">
+      <h2>Your Students Deserve an AI-Powered Teacher</h2>
+      <p>Start your 7-day free trial today — full access, no credit card required. Invite a fellow teacher with your referral code later and earn 7 more free days for every successful referral.</p>
+      <button class="btn-gold" data-enter>Start Free Trial →</button>
+    </div>
+  </section>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-in">
+      <img data-hatch-src="assets/loona-education-logo-ribbon.webp" alt="" aria-hidden="true" />
+      <div><b>Loona Education</b><span style="font-size:12.5px">AI Teachers Institute</span></div>
+      <div class="f-right">Daily tasks · Live evening classes · Facilitator-reviewed progress<br />© 2026 Loona Education</div>
+    </div>
+  </footer>
+</div>
+
+<div class="shell app-hidden" id="appShell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <div class="brand">
+      <img class="brand-logo" data-hatch-src="assets/loona-education-logo-ribbon.webp" alt="Loona Education logo — eagle emblem with graduation cap, open book and name ribbon" />
+      <div><b>Loona Education</b><span>AI Teachers Institute</span></div>
+    </div>
+    <nav class="nav" id="mainNav">
+      <button data-nav="dashboard" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</button>
+      <button data-nav="profile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>My Profile</button>
+      <button data-nav="classes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="13" rx="2"/><path d="M10 9.5v4l4-2z" fill="currentColor" stroke="none"/><path d="M8 21h8"/></svg>Online Classes</button>
+      <button data-nav="attendance"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M9 15l2 2 4-4"/></svg>Attendance</button>
+      <button data-nav="announcements"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l14-6v14L3 13v-2z"/><path d="M17 8a4 4 0 0 1 0 8M7 13v5a2 2 0 0 0 4 0v-4"/></svg>Announcements</button>
+      <button data-nav="referral"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.5 2.9-5.5 6.5-5.5s6.5 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c0-2.8-1.8-4.6-4.5-5.3"/></svg>Referral Program</button>
+      <button data-nav="payment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Custom Payment</button>
+      <button data-nav="certificates"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>Certificates</button>
+      <button data-nav="help"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5A2.5 2.5 0 1 1 12 12v1M12 17h.01"/></svg>Help</button>
+      <button data-nav="feedback"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/></svg>Feedback</button>
+      <button data-nav="leaderboard"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>Leaderboard</button>
+      <button data-nav="activity"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Activity Log</button>
+    </nav>
+    <div class="side-foot">
+      <button class="btn-ghost" id="viewSiteBtn">🌐 View Website</button>
+      <button class="btn-premium" id="premiumBtn">👑 Premium Active</button>
+      <button class="btn-ghost" id="darkToggle" aria-pressed="false">🌙 Dark Mode</button>
+      <button class="btn-logout" id="logoutBtn">Logout</button>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <header class="topbar">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <img class="top-logo" data-hatch-src="assets/loona-education-logo-ribbon.webp" alt="" aria-hidden="true" />
+      <h1 id="pageTitle">Dashboard</h1>
+      <div class="top-right">
+        <button class="att-pill" data-goto="attendance">✓ Attendance</button>
+        <div class="user-chip">
+          <div class="u-meta"><b>New Student</b><span>Level 1 Student</span></div>
+          <div class="avatar" aria-hidden="true">NS</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== DASHBOARD ===== -->
+    <section class="section active" id="sec-dashboard">
+      <div class="premium-banner">👑 <span><b>Premium Account Active</b> — You have full access to all features and tasks.</span></div>
+
+      <div class="dash-grid">
+        <!-- My Progress -->
+        <div class="card">
+          <h3>My Progress <span class="badge-premium">PREMIUM</span></h3>
+          <div class="tabs" role="tablist" aria-label="Book selector">
+            <button class="active" data-book="1">Book 1</button>
+            <button data-book="2">Book 2</button>
+          </div>
+          <div class="progress-wrap">
+            <div class="ring" role="img" aria-label="Level 1 progress: 0 percent complete">
+              <svg width="128" height="128" viewBox="0 0 128 128">
+                <circle cx="64" cy="64" r="54" fill="none" stroke="var(--line)" stroke-width="12"/>
+                <circle id="ringFg" cx="64" cy="64" r="54" fill="none" stroke="var(--blue)" stroke-width="12" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
+              </svg>
+              <div class="ring-num"><div><b id="ringPct">0%</b><span>Complete</span></div></div>
+            </div>
+            <div class="stat-grid">
+              <div class="stat"><b id="statDone">0</b><span>Done</span></div>
+              <div class="stat"><b id="statPending">0</b><span>Pending</span></div>
+              <div class="stat"><b>0</b><span>Rejected</span></div>
+              <div class="stat"><b id="statRemain">251</b><span>Remaining</span></div>
+            </div>
+          </div>
+          <p class="hint" id="bookNote" style="margin-top:12px">Book 1 · Level 1 (Foundation) — 0 of 251 tasks approved. Start with your Day 1 tasks.</p>
+        </div>
+
+        <!-- Course Analytics -->
+        <div class="card">
+          <h3>Course Analytics</h3>
+          <div class="bar-row">
+            <div class="bar-head">Level 1 Progress <span>0%</span></div>
+            <div class="bar"><i style="width:0%"></i></div>
+            <div class="cert-bar-note">0 / 251 tasks completed</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-head">Level 2 Progress <span>0%</span></div>
+            <div class="bar"><i class="green" style="width:0%"></i></div>
+            <div class="cert-bar-note">0 / 201 tasks completed</div>
+          </div>
+          <div class="insight">🤖 <b>AI Insight:</b> Welcome aboard! Start with your Day 1 tasks below — every approved task moves this bar, and at 251/251 your Level 1 certificate unlocks.</div>
+        </div>
+
+        <!-- AI Assistant (compact, in-flow, top-right) -->
+        <div class="card assistant" id="assistantCard">
+          <div class="assistant-head">
+            <div class="bot" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V4M12 4h.01"/><circle cx="9" cy="13.5" r="1" fill="currentColor"/><circle cx="15" cy="13.5" r="1" fill="currentColor"/><path d="M9.5 16.5h5"/></svg></div>
+            <h3>AI Assistant</h3><span class="live">Online</span>
+          </div>
+          <div class="assistant-msgs" id="assistantMsgs" aria-live="polite">
+            <div class="msg bot">Hi! Welcome to Loona Education. I'm your assistant — ask me anything about your tasks, certificate or classes.</div>
+          </div>
+          <div class="chips" id="assistantChips">
+            <button data-q="How do I submit a task?">Submit a task</button>
+            <button data-q="When do I get my certificate?">Certificate?</button>
+            <button data-q="Tell me about the online classes">Classes</button>
+            <button data-q="How does the referral program work?">Referral</button>
+          </div>
+          <form class="assistant-form" id="assistantForm">
+            <input id="assistantInput" type="text" placeholder="Ask about your tasks..." autocomplete="off" aria-label="Ask the AI assistant" />
+            <button class="send-btn" type="submit" aria-label="Send question"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Select Task -->
+      <div class="card section-card">
+        <h3>Select Task</h3>
+        <div class="filters">
+          <select id="fLevel" aria-label="Select level">
+            <option value="1">Level 1 (Foundation)</option>
+            <option value="2">Level 2 (Advanced)</option>
+          </select>
+          <select id="fDay" aria-label="Select day">
+            <option value="all">All Days</option>
+          </select>
+          <select id="fCat" aria-label="Task category">
+            <option value="all">All Categories</option>
+          </select>
+          <button class="btn-go" id="goTasks">Go to Tasks →</button>
+        </div>
+      </div>
+
+      <!-- Your Tasks -->
+      <div class="card section-card" id="tasksCard">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <h3 style="flex:1">Your Tasks</h3>
+          <div class="count-badges">
+            <span class="cb-approved">APPROVED: <b id="approvedCount">0</b></span>
+            <span class="cb-pending">PENDING: <b id="pendingCount">0</b></span>
+          </div>
+        </div>
+        <div class="task-list" id="taskList"></div>
+        <p class="hint" id="tasksHint" style="margin-top:14px">Showing your Level 1 tasks — 251 tasks over 41 working days. Start with Day 1 and work through them in order. Use the filters above to jump by day or category.</p>
+      </div>
+    </section>
+
+    <!-- ===== ONLINE CLASSES ===== -->
+    <section class="section" id="sec-classes">
+      <div class="sec-head"><h2>Online Classes</h2><p>Live classes run Monday to Friday in the evening. Choose a facilitator to guide your learning journey.</p></div>
+      <div class="card">
+        <div class="info-box">🎓 <b>Select Your Facilitator</b> — You have access. Now select a facilitator to guide you through your learning journey.</div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn-purple" id="browseFac">Browse Facilitators</button>
+          <button class="btn-outline" data-goto="attendance">Mark Today's Attendance</button>
+        </div>
+        <div id="facList" style="display:none;margin-top:18px">
+          <div class="grid-3">
+            <div class="stat" style="padding:16px"><b style="font-size:16px">Loona Facilitators</b><span>Senior Facilitators · AI Tools &amp; Content</span><div style="margin-top:10px"><button class="btn-primary fac-pick" style="padding:8px 16px;font-size:13px">Select</button></div></div>
+            <div class="stat" style="padding:16px"><b style="font-size:16px">Loona Support Team</b><span>Student Support · Classes &amp; Guidance</span><div style="margin-top:10px"><button class="btn-primary fac-pick" style="padding:8px 16px;font-size:13px">Select</button></div></div>
+            <div class="stat" style="padding:16px"><b style="font-size:16px">Loona Mentors Team</b><span>Co-Facilitators · Task Review &amp; Support</span><div style="margin-top:10px"><button class="btn-primary fac-pick" style="padding:8px 16px;font-size:13px">Select</button></div></div>
+          </div>
+          <p class="hint" id="facChosen" style="margin-top:12px"></p>
+        </div>
+        <h3 style="margin-top:22px">About the Facilitator System</h3>
+        <ul style="color:var(--ink-2);font-size:14px;padding-left:19px;margin:10px 0 0">
+          <li>Personalized guidance from experienced facilitators</li>
+          <li>Feedback and support throughout your training</li>
+          <li>Join batches and connect with other learners</li>
+          <li>Track your progress together with your facilitator</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== ATTENDANCE ===== -->
+    <section class="section" id="sec-attendance">
+      <div class="sec-head"><h2>Attendance</h2><p>Batch 1 · Loona AI Teachers Training · Class 08:00 PM – 10:00 PM, Monday to Friday.</p></div>
+      <div class="card">
+        <div style="background:var(--blue-dark);color:#fff;border-radius:12px;padding:16px 18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+          <b style="font-family:'Sora',sans-serif">Batch 1 | Loona AI Teachers Training</b>
+          <span style="opacity:.85;font-size:13px">Class — 08:00 PM – 10:00 PM · Mon, Tue, Wed, Thu, Fri</span>
+          <span style="margin-left:auto;font-size:13px;font-weight:700" id="clockNow">Current Time: —</span>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Attendance tabs">
+          <button class="active" data-att="today">Today</button>
+          <button data-att="history">History</button>
+          <button data-att="leave">Leave</button>
+        </div>
+        <div id="att-today">
+          <p style="color:var(--ink-2)" id="attTodayText">Class starts at 08:00 PM. Check-in opens then.</p>
+          <button class="btn-primary" id="checkInBtn">Check In for Today's Class</button>
+          <p class="hint" style="margin-top:10px" id="checkInNote">Your check-in is recorded for this session only on this demo dashboard.</p>
+        </div>
+        <div id="att-history" style="display:none">
+          <div class="table-wrap"><table>
+            <thead><tr><th>Date</th><th>Class</th><th>Status</th></tr></thead>
+            <tbody id="attHistoryBody">
+              <tr id="attEmptyRow"><td colspan="3" style="text-align:center;color:var(--muted)">No attendance recorded yet — your history will appear here after your first class.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div id="att-leave" style="display:none">
+          <label class="f" for="leaveDate">Leave date</label>
+          <input class="inp" type="date" id="leaveDate" />
+          <label class="f" for="leaveReason">Reason</label>
+          <textarea class="inp" id="leaveReason" placeholder="Why do you need leave?"></textarea>
+          <div style="margin-top:14px"><button class="btn-primary" id="leaveBtn">Request Leave</button></div>
+          <p class="hint" id="leaveNote" style="margin-top:10px"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ANNOUNCEMENTS ===== -->
+    <section class="section" id="sec-announcements">
+      <div class="sec-head"><h2>Announcements</h2><p>Updates from the Loona Education team.</p></div>
+      <div class="card">
+        <div class="task" style="margin-bottom:12px"><div class="stripe" style="background:var(--blue)"></div><div class="body">
+          <div class="t-top"><h4>Welcome to Loona Education 🎓</h4><span class="status st-approved">NEW</span></div>
+          <p>Assalam-o-Alaikum and welcome! Your Level 1 (Foundation) journey has 251 tasks spread over 41 working days. Classes run Mon–Fri in the evening. Complete your daily tasks, submit your links, and unlock your Level 1 certificate at 100%.</p>
+          <p class="hint" style="margin-top:8px">Loona Education Team · Batch 1</p>
+        </div></div>
+        <div class="task"><div class="stripe" style="background:var(--orange)"></div><div class="body">
+          <div class="t-top"><h4>Referral Program is live</h4><span class="status st-pending">INFO</span></div>
+          <p>Invite a fellow teacher and earn 7 days of FREE premium access for every successful referral. Find your personal code in the Referral Program section.</p>
+          <p class="hint" style="margin-top:8px">Loona Education Team</p>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== REFERRAL ===== -->
+    <section class="section" id="sec-referral">
+      <div class="sec-head"><h2>Referral Program</h2><p>Invite friends and earn <b>7 days FREE access</b> for each successful referral!</p></div>
+      <div class="grid-3" style="margin-bottom:18px">
+        <div class="card big-stat o"><b>0</b><span>Total Referrals</span></div>
+        <div class="card big-stat g"><b>0</b><span>Bonus Days Earned</span></div>
+        <div class="card big-stat b"><b>0</b><span>Active Referrals</span></div>
+      </div>
+      <div class="card">
+        <h3>Your Referral Code</h3>
+        <div class="code-box"><code id="refCode">LOONA-STUDENT-1</code>
+          <button class="btn-small" id="copyCodeBtn">Copy Code</button>
+        </div>
+        <p style="color:var(--ink-2);font-size:14px">Share your invitation with fellow teachers. When they join Loona Education with your code and start learning, 7 free premium days are added to your account for each successful referral.</p>
+        <button class="btn-primary" id="shareBtn" style="background:var(--green)">Share Invitation</button>
+        <p class="hint" id="shareNote" style="margin-top:10px"></p>
+      </div>
+    </section>
+
+    <!-- ===== CUSTOM PAYMENT ===== -->
+    <section class="section" id="sec-payment">
+      <div class="sec-head"><h2>Custom Payment</h2><p>Pay pending fees or make a custom payment toward your training.</p></div>
+      <div class="card" style="max-width:560px;margin:0 auto">
+        <label class="f" for="payAmount">Amount (USD) *</label>
+        <input class="inp" id="payAmount" type="number" min="1" max="10000" placeholder="e.g. 25" />
+        <p class="hint">Min: $1 · Max: $10,000</p>
+        <label class="f" for="payCard">Card Details *</label>
+        <input class="inp" id="payCard" type="text" inputmode="numeric" placeholder="1234 5678 9012 3456" maxlength="19" />
+        <div style="display:flex;gap:10px">
+          <div style="flex:1"><label class="f" for="payExp">Expiry</label><input class="inp" id="payExp" placeholder="MM / YY" maxlength="7" /></div>
+          <div style="flex:1"><label class="f" for="payCvc">CVC</label><input class="inp" id="payCvc" placeholder="123" maxlength="4" inputmode="numeric" /></div>
+        </div>
+        <button class="btn-primary" id="payBtn" style="width:100%;margin-top:20px">Pay Now</button>
+        <p class="hint" id="payNote" style="margin-top:12px;text-align:center">Demo checkout — no real payment is charged on this page.</p>
+        <div style="text-align:center;margin-top:8px"><button class="btn-outline" data-goto="dashboard">← Back to Dashboard</button></div>
+      </div>
+    </section>
+
+    <!-- ===== CERTIFICATES ===== -->
+    <section class="section" id="sec-certificates">
+      <div class="sec-head"><h2>Certificates</h2><p>A certificate unlocks when you complete 100% of its level's tasks.</p></div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>🎓 Level 1 Certificate</h3>
+          <p style="color:var(--ink-2);font-size:14px;margin:8px 0 0">Complete all Level 1 tasks to request your certificate.</p>
+          <div class="bar-row"><div class="bar-head">Progress <span>0%</span></div><div class="bar"><i style="width:0%"></i></div><div class="cert-bar-note">0 / 251 tasks completed</div></div>
+          <button class="btn-locked" disabled>🔒 Complete Tasks First</button>
+        </div>
+        <div class="card">
+          <h3>🎓 Level 2 Certificate</h3>
+          <p style="color:var(--ink-2);font-size:14px;margin:8px 0 0">Complete all Level 2 tasks to request your certificate.</p>
+          <div class="bar-row"><div class="bar-head">Progress <span>0%</span></div><div class="bar"><i class="green" style="width:0%"></i></div><div class="cert-bar-note">0 / 201 tasks completed</div></div>
+          <button class="btn-locked" disabled>🔒 Complete Tasks First</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HELP ===== -->
+    <section class="section" id="sec-help">
+      <div class="sec-head"><h2>Help — Task Type Guide</h2><p>Click any task type below to see what you need to do, how to write your post, and the final checklist your reviewer uses.</p></div>
+      <div class="info-box" style="margin-bottom:14px">📘 New to a task type? Open it, follow the steps exactly, and tick off every chip in the final checklist before you submit.</div>
+      <button class="btn-primary" id="guideBtn" style="margin-bottom:16px">⬇ Download Level 1 Tasks &amp; Rubrics Guide (Text)</button>
+      <div id="helpList"></div>
+    </section>
+
+    <!-- ===== FEEDBACK ===== -->
+    <section class="section" id="sec-feedback">
+      <div class="sec-head"><h2>Feedback and Issue</h2><p>Tell us what is working — or what is broken. Quality feedback climbs the <a href="#" data-goto="leaderboard">Leaderboard</a>.</p></div>
+      <div class="card" style="max-width:640px">
+        <h3>Submit Feedback or Report Issue</h3>
+        <label class="f" for="fbName">Name *</label><input class="inp" id="fbName" placeholder="Your full name" />
+        <label class="f" for="fbEmail">Email *</label><input class="inp" id="fbEmail" type="email" placeholder="your@email.com" />
+        <label class="f" for="fbType">Feedback Type *</label>
+        <select class="inp" id="fbType"><option>Suggestion</option><option>Bug Report</option><option>Task Problem</option><option>Payment Issue</option><option>Other</option></select>
+        <label class="f" for="fbSubject">Subject *</label><input class="inp" id="fbSubject" placeholder="Short summary" />
+        <label class="f" for="fbDesc">Description *</label><textarea class="inp" id="fbDesc" placeholder="Describe it in detail..."></textarea>
+        <label class="f" for="fbShot">Screenshot (Optional) — Max 10MB, JPEG/PNG/GIF/WebP</label><input class="inp" id="fbShot" type="file" accept="image/jpeg,image/png,image/gif,image/webp" />
+        <div style="margin-top:18px"><button class="btn-primary" id="fbBtn">Submit Feedback / Issue</button></div>
+        <p class="hint" id="fbNote" style="margin-top:10px"></p>
+      </div>
+      <div class="card" style="max-width:640px;margin-top:18px">
+        <h3>My Previous Feedbacks and Issues</h3>
+        <div id="fbList"><p class="empty-note">No feedback submitted yet in this session.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== LEADERBOARD ===== -->
+    <section class="section" id="sec-leaderboard">
+      <div class="sec-head"><h2>Feedback Scoreboard</h2><p>Realtime Analytics &amp; Insights · <span style="color:var(--green);font-weight:800">● Live</span></p></div>
+      <div class="grid-3" style="margin-bottom:18px">
+        <div class="card big-stat b"><b id="lbTotal">0</b><span>Your Total Feedbacks</span></div>
+        <div class="card big-stat g"><b id="lbWeek">0</b><span>Your Feedbacks This Week</span></div>
+        <div class="card big-stat o"><b id="lbRank">#–</b><span>Your Weekly Rank</span></div>
+      </div>
+      <div class="card">
+        <h3>🏆 Top 3 Weekly Contributors</h3>
+        <div class="podium">
+          <div class="pod first"><b>🥇 Loona Facilitators</b><span>Senior Facilitators · 12 feedbacks</span></div>
+          <div class="pod"><b>🥈 Loona Support Team</b><span>Student Support · 9 feedbacks</span></div>
+          <div class="pod"><b>🥉 Loona Mentors</b><span>Review Team · 7 feedbacks</span></div>
+        </div>
+        <div class="insight">💡 Keep submitting quality feedbacks to climb the leaderboard! Implemented feedbacks earn Golden and Silver rewards.</div>
+        <div class="table-wrap" style="margin-top:14px"><table>
+          <thead><tr><th>Rank</th><th>Name</th><th>Total Feedbacks</th><th>Weekly</th><th>Implemented</th><th>Reward</th></tr></thead>
+          <tbody>
+            <tr><td><span class="rank-medal">1</span></td><td>Loona Facilitators</td><td>48</td><td>12</td><td>31</td><td>Golden</td></tr>
+            <tr><td><span class="rank-medal">2</span></td><td>Loona Support Team</td><td>39</td><td>9</td><td>24</td><td>Silver</td></tr>
+            <tr><td><span class="rank-medal">3</span></td><td>Loona Mentors</td><td>27</td><td>7</td><td>15</td><td>Silver</td></tr>
+            <tr><td><span class="rank-medal">4</span></td><td>You (New Student)</td><td id="lbYouTotal">0</td><td id="lbYouWeek">0</td><td>0</td><td>—</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ===== ACTIVITY LOG ===== -->
+    <section class="section" id="sec-activity">
+      <div class="sec-head"><h2>Activity Log</h2><p>Your task progress across platforms.</p></div>
+      <div class="card" style="margin-bottom:18px">
+        <h3>Task Progress Distribution</h3>
+        <div class="donut-wrap" style="margin-top:14px">
+          <svg width="180" height="180" viewBox="0 0 180 180" role="img" aria-label="Donut chart: no tasks submitted yet, total 0">
+            <circle cx="90" cy="90" r="70" fill="none" stroke="var(--line)" stroke-width="24"/>
+            <text x="90" y="84" text-anchor="middle" font-family="Sora,sans-serif" font-size="26" font-weight="800" fill="var(--ink)">0</text>
+            <text x="90" y="106" text-anchor="middle" font-size="12" font-weight="700" fill="var(--muted)">Total Tasks</text>
+          </svg>
+          <div class="legend">
+            <span>No tasks submitted yet — your Facebook / YouTube / LinkedIn split will appear here as you publish your work.</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:18px" id="actStats">
+        <div class="card big-stat b"><b>0</b><span>Facebook Tasks</span></div>
+        <div class="card big-stat" style="color:var(--red)"><b style="color:var(--red)">0</b><span>YouTube Tasks</span></div>
+        <div class="card big-stat"><b style="color:#0a8ea8">0</b><span>LinkedIn Tasks</span></div>
+        <div class="card big-stat o"><b>0</b><span>Other Tasks</span></div>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><h3 style="flex:1">Activity Log</h3><button class="btn-outline" id="exportBtn">⤓ Export CSV</button></div>
+        <div class="log-filters">
+          <input id="logSearch" type="search" placeholder="Search activities..." aria-label="Search activities" />
+          <select id="logType" aria-label="Activity type"><option value="all">All Types</option><option>Task Submitted</option><option>Task Approved</option><option>Attendance</option><option>Login</option></select>
+        </div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Time</th><th>Activity</th><th>Type</th><th>Platform</th></tr></thead>
+          <tbody id="logBody"></tbody>
+        </table></div>
+        <p class="hint" style="margin-top:10px">Your activity appears here as you attend classes and submit tasks.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ============ PROFILE MODAL ============ -->
+<div class="modal-back" id="profileModal" role="dialog" aria-modal="true" aria-label="My Profile">
+  <div class="modal">
+    <div class="modal-head"><h3>My Profile</h3><button class="x-btn" data-close aria-label="Close">✕</button></div>
+    <div class="profile-photo"><div class="avatar">NS</div><div><b>New Student</b><div class="hint">Level 1 Student · Batch 1</div><button class="btn-small" id="changePhoto" style="margin-top:6px">Change Photo</button></div></div>
+    <label class="f" for="pfName">Full Name</label>
+    <div style="display:flex;gap:8px"><input class="inp" id="pfName" placeholder="Your full name" /><button class="btn-small" id="editName">Edit Name</button></div>
+    <label class="f" for="pfEmail">Email</label>
+    <div style="display:flex;gap:8px"><input class="inp" id="pfEmail" type="email" placeholder="your@email.com" /><button class="btn-small" id="editEmail">Edit Email</button></div>
+    <button class="btn-yellow" id="changePass">Change Password</button>
+    <p class="hint" id="pfNote" style="margin-top:10px"></p>
+  </div>
+</div>
+
+<!-- ============ TASK DETAILS MODAL ============ -->
+<div class="modal-back" id="taskModal" role="dialog" aria-modal="true" aria-label="Task details">
+  <div class="modal">
+    <div class="modal-head"><h3>Task Details</h3><button class="x-btn" data-close aria-label="Close">✕</button></div>
+    <div class="meta-chips"><span class="mc-day" id="tmDay">Day 1</span><span class="mc-level" id="tmLevel">Level 1</span><span class="mc-topic" id="tmCat">Category</span></div>
+    <h4 id="tmTitle" style="font-size:16px"></h4>
+    <p id="tmDesc" style="color:var(--ink-2)"></p>
+    <h5 style="margin:14px 0 5px;font-size:12px;letter-spacing:.05em;color:var(--blue-dark)">DETAILED INSTRUCTIONS</h5>
+    <p id="tmInst" style="color:var(--ink-2);margin:0"></p>
+    <div style="margin-top:18px;display:flex;gap:9px;flex-wrap:wrap">
+      <button class="btn-primary" data-close>Close</button>
+      <button class="btn-submit" id="tmSubmitBtn" style="display:none">Submit Task</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SUBMIT TASK MODAL ============ -->
+<div class="modal-back" id="submitModal" role="dialog" aria-modal="true" aria-label="Submit task">
+  <div class="modal">
+    <div class="modal-head"><h3>Submit Task</h3><button class="x-btn" data-close aria-label="Close">✕</button></div>
+    <p class="hint" id="smTitle" style="margin-top:6px"></p>
+    <h5 style="margin:14px 0 4px;font-size:13px">Social Media Submission Links:</h5>
+    <div class="warn-box">⚠ You cannot submit the same social media links that you've already used in previous tasks. Each submission must contain unique content.</div>
+    <label class="f" for="smFb">Facebook Post Link</label><input class="inp" id="smFb" placeholder="https://facebook.com/..." />
+    <label class="f" for="smYt">YouTube Post Link</label><input class="inp" id="smYt" placeholder="https://youtube.com/..." />
+    <label class="f" for="smLi">LinkedIn Post Link</label><input class="inp" id="smLi" placeholder="https://linkedin.com/..." />
+    <h5 style="margin:16px 0 4px;font-size:13px">Platform problem (only if you could not post)</h5>
+    <label class="checkline"><input type="checkbox" class="sm-prob" value="Facebook" /> Facebook</label>
+    <label class="checkline"><input type="checkbox" class="sm-prob" value="YouTube" /> YouTube</label>
+    <label class="checkline"><input type="checkbox" class="sm-prob" value="LinkedIn" /> LinkedIn</label>
+    <textarea class="inp" id="smProbText" placeholder="Explain the platform problem (minimum 15 characters, only if a box above is ticked)" style="margin-top:6px"></textarea>
+    <label class="f" for="smDesc">Description (Required)</label>
+    <p class="hint">Paste here the same description (caption) that you wrote on your post: title, topic/episode number, key points, tags and hashtags, exactly as the task rubric asks.</p>
+    <textarea class="inp" id="smDesc" placeholder="Your post description..." style="margin-top:6px"></textarea>
+    <div class="char-count"><span id="smCount">0</span> / 30 min characters</div>
+    <p class="hint" id="smError" style="color:var(--red)"></p>
+    <button class="btn-primary" id="smSubmit" style="width:100%;margin-top:12px;background:var(--orange);color:#fff">Submit Task</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+
+<script data-hatch-cvm-bundle>(() => {
+  var __defProp = Object.defineProperty;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  function __accessProp(key) {
+    return this[key];
+  }
+  var __toCommonJS = (from) => {
+    var entry = (__moduleCache ??= new WeakMap).get(from), desc;
+    if (entry)
+      return entry;
+    entry = __defProp({}, "__esModule", { value: true });
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (var key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(entry, key))
+          __defProp(entry, key, {
+            get: __accessProp.bind(from, key),
+            enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+          });
+    }
+    __moduleCache.set(from, entry);
+    return entry;
+  };
+  var __moduleCache;
+
+  // src/prelude.ts
+  var exports_prelude = {};
+
+  // src/tunnel-url.ts
+  var B64_CHUNK = 32768;
+  function computeSelfBaseDir(selfHref) {
+    if (!selfHref)
+      return "";
+    let h = selfHref;
+    const hash = h.indexOf("#");
+    if (hash >= 0)
+      h = h.slice(0, hash);
+    const q = h.indexOf("?");
+    if (q >= 0)
+      h = h.slice(0, q);
+    const slash = h.lastIndexOf("/");
+    return slash >= 0 ? h.slice(0, slash + 1) : "";
+  }
+  function isSelfOriginUrl(u, selfBaseDir, selfHref, objectUrls) {
+    if (!selfBaseDir || !u.startsWith(selfBaseDir))
+      return false;
+    if (u === selfHref)
+      return false;
+    return !objectUrls.has(u);
+  }
+  function isExternalUrl(u, selfBaseDir, selfHref, objectUrls) {
+    if (!u)
+      return false;
+    if (u.startsWith("#"))
+      return true;
+    if (isSelfOriginUrl(u, selfBaseDir, selfHref, objectUrls))
+      return false;
+    if (u.startsWith("data:") || u.startsWith("blob:"))
+      return true;
+    if (u.startsWith("about:") || u.startsWith("javascript:"))
+      return true;
+    if (u.startsWith("//"))
+      return true;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(u)) {
+      return true;
+    }
+    return false;
+  }
+  function normalizeToRelPath(u, selfBaseDir) {
+    let s = u;
+    if (selfBaseDir && s.startsWith(selfBaseDir)) {
+      s = s.slice(selfBaseDir.length);
+    }
+    s = s.replace(/^\.\//, "");
+    s = s.replace(/^\/+/, "");
+    return s;
+  }
+  function blobInner(base, NativeURL) {
+    if (base == null)
+      return null;
+    const s = typeof base === "string" ? base : base instanceof NativeURL ? base.href : String(base);
+    return s.startsWith("blob:") ? s.slice("blob:".length) : null;
+  }
+  var OPAQUE_BLOB_ORIGIN = "https://hatch-cvm-opaque.invalid";
+  function isAbsoluteUrlString(s, NativeURL) {
+    try {
+      new NativeURL(s);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  function resolveAgainstBlobBase(u, base, NativeURL) {
+    const inner = blobInner(base, NativeURL);
+    if (inner === null)
+      return null;
+    if (isAbsoluteUrlString(inner, NativeURL)) {
+      return new NativeURL("blob:" + new NativeURL(u, inner).href);
+    }
+    const slash = inner.indexOf("/");
+    const token = slash >= 0 ? inner.slice(0, slash) : inner;
+    const path = slash >= 0 ? inner.slice(slash) : "/";
+    const resolved = new NativeURL(u, OPAQUE_BLOB_ORIGIN + path);
+    return new NativeURL("blob:" + token + resolved.pathname + resolved.search + resolved.hash);
+  }
+  function resolveTunnelUrl(url, base, selfHref, NativeURL) {
+    const u = url == null ? "" : typeof url === "string" ? url : url instanceof NativeURL ? url.href : String(url);
+    const uAbsolute = /^[a-z][a-z0-9+.-]*:/i.test(u) || u.startsWith("//");
+    if (base !== undefined && base !== null && !uAbsolute) {
+      const viaBlob = resolveAgainstBlobBase(u, base, NativeURL);
+      if (viaBlob !== null)
+        return viaBlob;
+      return new NativeURL(u, base);
+    }
+    if (!uAbsolute && selfHref) {
+      const viaBlob = resolveAgainstBlobBase(u, selfHref, NativeURL);
+      if (viaBlob !== null)
+        return viaBlob;
+    }
+    return base === undefined ? new NativeURL(u) : new NativeURL(u, base);
+  }
+  function bytesToBase64(bytes) {
+    const u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    let s = "";
+    for (let i = 0;i < u8.length; i += B64_CHUNK) {
+      s += String.fromCharCode.apply(null, Array.from(u8.subarray(i, i + B64_CHUNK)));
+    }
+    return btoa(s);
+  }
+  function base64ToBytes(b64) {
+    const bin = atob(b64);
+    const out = new Uint8Array(bin.length);
+    for (let i = 0;i < bin.length; i++)
+      out[i] = bin.charCodeAt(i);
+    return out;
+  }
+  function importMetaUrl(selfHref, selfBaseDir) {
+    return selfBaseDir ? `${selfBaseDir}assets/cvm-bundle.js` : selfHref;
+  }
+
+  // src/download-links.ts
+  function installDownloadLinks(fetchAsset, isExternalUrl, revokeDelayMs) {
+    document.addEventListener("click", (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+        return;
+      const anchor = event.composedPath().find((node) => node instanceof HTMLAnchorElement);
+      if (!anchor?.hasAttribute("download"))
+        return;
+      const href = anchor.getAttribute("href");
+      if (!href || isExternalUrl(href))
+        return;
+      event.preventDefault();
+      const filename = anchor.download || resourceFilename(href);
+      (async () => {
+        const response = await fetchAsset(href);
+        if (!response.ok) {
+          throw new Error(`Artifact download failed: HTTP ${response.status}`);
+        }
+        const url = URL.createObjectURL(await response.blob());
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.hidden = true;
+        document.body.appendChild(link);
+        try {
+          link.click();
+        } finally {
+          link.remove();
+          setTimeout(() => URL.revokeObjectURL(url), revokeDelayMs);
+        }
+      })().catch((error) => reportError(error));
+    });
+  }
+  function resourceFilename(href) {
+    const path = new URL(href, document.baseURI).pathname;
+    const name = path.slice(path.lastIndexOf("/") + 1);
+    try {
+      return decodeURIComponent(name);
+    } catch {
+      return name;
+    }
+  }
+
+  // src/fragment-links.ts
+  function installFragmentLinks() {
+    if (!location.href.startsWith("blob:null/"))
+      return;
+    const NativeURL = URL;
+    const pushState = history.pushState.bind(history);
+    const replaceState = history.replaceState.bind(history);
+    window.addEventListener("click", (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+        return;
+      const anchor = event.composedPath().find((node) => node instanceof HTMLAnchorElement);
+      if (!anchor || anchor.hasAttribute("download"))
+        return;
+      const targetName = anchor.getAttribute("target") ?? document.querySelector("base[target]")?.getAttribute("target") ?? "";
+      if (targetName !== "" && targetName.toLowerCase() !== "_self")
+        return;
+      const href = anchor.getAttribute("href");
+      if (!href?.startsWith("#"))
+        return;
+      const oldURL = location.href;
+      const nextURL = new NativeURL(href, oldURL);
+      event.preventDefault();
+      const changed = nextURL.href !== oldURL;
+      if (changed) {
+        pushState(null, "", nextURL.href);
+      } else {
+        replaceState(null, "", nextURL.href);
+      }
+      window.dispatchEvent(new PopStateEvent("popstate", { state: null }));
+      const target = fragmentTarget(nextURL.hash);
+      if (target) {
+        target.scrollIntoView();
+        if (target !== document.documentElement && (target instanceof HTMLElement || target instanceof SVGElement)) {
+          const hadTabIndex = target.hasAttribute("tabindex");
+          if (!hadTabIndex)
+            target.setAttribute("tabindex", "-1");
+          target.focus({ preventScroll: true });
+          if (!hadTabIndex)
+            target.removeAttribute("tabindex");
+        }
+      }
+      if (changed) {
+        queueMicrotask(() => window.dispatchEvent(new HashChangeEvent("hashchange", {
+          oldURL,
+          newURL: nextURL.href
+        })));
+      }
+    });
+  }
+  function fragmentTarget(hash) {
+    const bytes = hash.slice(1).replace(/%([0-9a-f]{2})/gi, (_match, hex) => String.fromCharCode(parseInt(hex, 16)));
+    const fragment = new TextDecoder().decode(Uint8Array.from(bytes, (byte) => byte.charCodeAt(0)));
+    if (fragment === "")
+      return document.documentElement;
+    const idTarget = document.getElementById(fragment);
+    if (idTarget)
+      return idTarget;
+    const namedTarget = Array.from(document.getElementsByName(fragment)).find((node) => node instanceof HTMLAnchorElement);
+    return namedTarget ?? (fragment.toLowerCase() === "top" ? document.documentElement : null);
+  }
+
+  // src/prelude.ts
+  (function installTunnel() {
+    installFragmentLinks();
+    let port = null;
+    let portReadyResolve = null;
+    const portReady = new Promise((res) => {
+      portReadyResolve = res;
+    });
+    const pending = new Map;
+    const openWs = new Map;
+    function newId() {
+      return Math.random().toString(36).slice(2) + "-" + Date.now().toString(36);
+    }
+    function bytesToB64(bytes) {
+      return bytesToBase64(bytes);
+    }
+    function b64ToBytes(b64) {
+      return base64ToBytes(b64);
+    }
+    async function httpReq(method, path, body, headers) {
+      const p = port ?? await portReady;
+      const id = newId();
+      const headerArr = [];
+      if (headers) {
+        const h = new Headers(headers);
+        h.forEach((v, k) => headerArr.push([k, v]));
+      }
+      let bodyB64 = "";
+      if (body != null && body !== "") {
+        let bytes;
+        if (typeof body === "string") {
+          bytes = new TextEncoder().encode(body);
+        } else if (body instanceof ArrayBuffer) {
+          bytes = new Uint8Array(body);
+        } else if (body instanceof Uint8Array) {
+          bytes = body;
+        } else if (body instanceof Blob) {
+          bytes = new Uint8Array(await body.arrayBuffer());
+        } else if (body instanceof FormData) {
+          const boundary = "----HatchBoundary" + Math.random().toString(36).slice(2);
+          let s = "";
+          for (const [k, v] of body.entries()) {
+            s += `--${boundary}\r
+Content-Disposition: form-data; name="${k}"`;
+            if (v instanceof File) {
+              s += `; filename="${v.name}"\r
+Content-Type: ${v.type || "application/octet-stream"}\r
+\r
+`;
+              const fb = new Uint8Array(await v.arrayBuffer());
+              s += new TextDecoder("latin1").decode(fb);
+            } else {
+              s += `\r
+\r
+${v}`;
+            }
+            s += `\r
+`;
+          }
+          s += `--${boundary}--\r
+`;
+          bytes = new TextEncoder().encode(s);
+          headerArr.push([
+            "content-type",
+            `multipart/form-data; boundary=${boundary}`
+          ]);
+        } else {
+          bytes = new TextEncoder().encode(String(body));
+        }
+        bodyB64 = bytesToB64(bytes);
+      }
+      return new Promise((resolve, reject) => {
+        pending.set(id, {
+          resolve: (msg) => {
+            if (msg.error) {
+              reject(new Error(msg.error.message ?? "tunnel error"));
+              return;
+            }
+            resolve({
+              status: msg.status,
+              headers: msg.headers,
+              bytes: msg.bodyB64 ? b64ToBytes(msg.bodyB64) : new Uint8Array(0)
+            });
+          },
+          reject
+        });
+        p.postMessage({
+          type: "http.req",
+          id,
+          method,
+          path,
+          headers: headerArr,
+          bodyB64
+        });
+      });
+    }
+    async function tunnelFetch(input, init) {
+      let urlStr;
+      let method = init?.method ?? "GET";
+      let headers = init?.headers;
+      let body = init?.body;
+      if (input instanceof Request) {
+        urlStr = input.url;
+        method = init?.method ?? input.method;
+        headers = init?.headers ?? input.headers;
+        if (body == null && input.body) {
+          body = await input.arrayBuffer();
+        }
+      } else {
+        urlStr = String(input);
+      }
+      if (isExternalUrl2(urlStr)) {
+        return originalFetch(input, init);
+      }
+      const relPath = normalizeToRelPath2(urlStr);
+      const r = await httpReq(method, relPath, body ?? null, headers);
+      const respHeaders = new Headers;
+      for (const [k, v] of r.headers ?? [])
+        respHeaders.set(k, v);
+      return new Response(r.bytes, {
+        status: r.status,
+        headers: respHeaders
+      });
+    }
+
+    class TunnelWebSocket extends EventTarget {
+      readyState = 0;
+      static CONNECTING = 0;
+      static OPEN = 1;
+      static CLOSING = 2;
+      static CLOSED = 3;
+      CONNECTING = 0;
+      OPEN = 1;
+      CLOSING = 2;
+      CLOSED = 3;
+      url;
+      binaryType = "blob";
+      bufferedAmount = 0;
+      protocol = "";
+      extensions = "";
+      onopen = null;
+      onmessage = null;
+      onclose = null;
+      onerror = null;
+      _id;
+      constructor(urlIn, _protocols) {
+        super();
+        const urlStr = String(urlIn);
+        this.url = urlStr;
+        this._id = newId();
+        openWs.set(this._id, this);
+        const path = normalizeToRelPath2(urlStr);
+        (async () => {
+          const p = port ?? await portReady;
+          p.postMessage({ type: "ws.open", id: this._id, path });
+        })();
+      }
+      _handle(msg) {
+        if (msg.type === "ws.opened") {
+          this.readyState = 1;
+          const ev = new Event("open");
+          this.onopen?.(ev);
+          this.dispatchEvent(ev);
+        } else if (msg.type === "ws.message") {
+          const bytes = msg.dataB64 ? b64ToBytes(msg.dataB64) : new Uint8Array(0);
+          let data;
+          if (msg.binary) {
+            data = this.binaryType === "arraybuffer" ? bytes.buffer : new Blob([bytes]);
+          } else {
+            data = new TextDecoder().decode(bytes);
+          }
+          const ev = new MessageEvent("message", { data });
+          this.onmessage?.(ev);
+          this.dispatchEvent(ev);
+        } else if (msg.type === "ws.closed") {
+          this.readyState = 3;
+          const ev = new CloseEvent("close", {
+            code: msg.code ?? 1000,
+            reason: msg.reason ?? ""
+          });
+          this.onclose?.(ev);
+          this.dispatchEvent(ev);
+          openWs.delete(this._id);
+        } else if (msg.type === "ws.error") {
+          const ev = new Event("error");
+          this.onerror?.(ev);
+          this.dispatchEvent(ev);
+        }
+      }
+      send(data) {
+        (async () => {
+          const p = port ?? await portReady;
+          let bytes;
+          let binary = false;
+          if (typeof data === "string") {
+            bytes = new TextEncoder().encode(data);
+          } else if (data instanceof Blob) {
+            bytes = new Uint8Array(await data.arrayBuffer());
+            binary = true;
+          } else if (data instanceof ArrayBuffer) {
+            bytes = new Uint8Array(data);
+            binary = true;
+          } else if (ArrayBuffer.isView(data)) {
+            bytes = new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+            binary = true;
+          } else {
+            bytes = new TextEncoder().encode(String(data));
+          }
+          p.postMessage({
+            type: "ws.send",
+            id: this._id,
+            dataB64: bytesToB64(bytes),
+            binary
+          });
+        })();
+      }
+      close(code, reason) {
+        (async () => {
+          const p = port ?? await portReady;
+          p.postMessage({ type: "ws.close", id: this._id, code, reason });
+        })();
+      }
+      addEventListener(type, listener, options) {
+        super.addEventListener(type, listener, options);
+      }
+    }
+
+    class TunnelXHR extends EventTarget {
+      static UNSENT = 0;
+      static OPENED = 1;
+      static HEADERS_RECEIVED = 2;
+      static LOADING = 3;
+      static DONE = 4;
+      UNSENT = 0;
+      OPENED = 1;
+      HEADERS_RECEIVED = 2;
+      LOADING = 3;
+      DONE = 4;
+      readyState = 0;
+      status = 0;
+      statusText = "";
+      responseText = "";
+      response = null;
+      responseType = "";
+      responseURL = "";
+      withCredentials = false;
+      timeout = 0;
+      upload = new EventTarget;
+      onreadystatechange = null;
+      onload = null;
+      onerror = null;
+      onloadend = null;
+      onabort = null;
+      onprogress = null;
+      ontimeout = null;
+      _method = "GET";
+      _url = "";
+      _reqHeaders = [];
+      _respHeaders = [];
+      _aborted = false;
+      open(method, url) {
+        this._method = method;
+        this._url = url;
+        this.readyState = 1;
+        this.onreadystatechange?.();
+      }
+      setRequestHeader(name, value) {
+        this._reqHeaders.push([name, value]);
+      }
+      getAllResponseHeaders() {
+        return this._respHeaders.map(([k, v]) => `${k}: ${v}`).join(`\r
+`);
+      }
+      getResponseHeader(name) {
+        const lc = name.toLowerCase();
+        const hit = this._respHeaders.find(([k]) => k.toLowerCase() === lc);
+        return hit ? hit[1] : null;
+      }
+      abort() {
+        this._aborted = true;
+        this.readyState = 0;
+      }
+      send(body) {
+        if (isExternalUrl2(this._url)) {
+          const real = new originalXHR;
+          real.open(this._method, this._url);
+          for (const [k, v] of this._reqHeaders)
+            real.setRequestHeader(k, v);
+          real.onload = () => {
+            this.status = real.status;
+            this.responseText = real.responseText;
+            this.response = real.response;
+            this.readyState = 4;
+            this.onreadystatechange?.();
+            this.onload?.();
+            this.onloadend?.();
+            this.dispatchEvent(new Event("load"));
+          };
+          real.onerror = () => {
+            this.onerror?.();
+            this.dispatchEvent(new Event("error"));
+          };
+          real.send(body);
+          return;
+        }
+        const relPath = normalizeToRelPath2(this._url);
+        httpReq(this._method, relPath, body ?? null, this._reqHeaders).then((r) => {
+          if (this._aborted)
+            return;
+          this.status = r.status;
+          this._respHeaders = r.headers ?? [];
+          this.responseText = new TextDecoder().decode(r.bytes);
+          if (this.responseType === "arraybuffer") {
+            this.response = r.bytes.buffer;
+          } else if (this.responseType === "blob") {
+            this.response = new Blob([r.bytes]);
+          } else if (this.responseType === "json") {
+            try {
+              this.response = JSON.parse(this.responseText);
+            } catch {
+              this.response = null;
+            }
+          } else {
+            this.response = this.responseText;
+          }
+          this.readyState = 4;
+          this.onreadystatechange?.();
+          this.onload?.();
+          this.onloadend?.();
+          this.dispatchEvent(new Event("load"));
+        }, () => {
+          if (this._aborted)
+            return;
+          this.onerror?.();
+          this.dispatchEvent(new Event("error"));
+        });
+      }
+    }
+
+    class TunnelEventSource extends EventTarget {
+      static CONNECTING = 0;
+      static OPEN = 1;
+      static CLOSED = 2;
+      readyState = 0;
+      url;
+      withCredentials = false;
+      onopen = null;
+      onmessage = null;
+      onerror = null;
+      constructor(url) {
+        super();
+        this.url = String(url);
+        (async () => {
+          try {
+            const relPath = normalizeToRelPath2(this.url);
+            const r = await httpReq("GET", relPath, null, [
+              ["accept", "text/event-stream"]
+            ]);
+            this.readyState = 1;
+            this.onopen?.(new Event("open"));
+            const text = new TextDecoder().decode(r.bytes);
+            for (const block of text.split(/\n\n/)) {
+              const data = block.split(`
+`).filter((l) => l.startsWith("data:")).map((l) => l.slice(5).trim()).join(`
+`);
+              if (data) {
+                const ev = new MessageEvent("message", { data });
+                this.onmessage?.(ev);
+                this.dispatchEvent(ev);
+              }
+            }
+            this.readyState = 2;
+          } catch {
+            this.onerror?.(new Event("error"));
+          }
+        })();
+      }
+      close() {
+        this.readyState = 2;
+      }
+    }
+    const SELF_HREF = (() => {
+      try {
+        return globalThis.location?.href ?? "";
+      } catch {
+        return "";
+      }
+    })();
+    const SELF_BASE_DIR = computeSelfBaseDir(SELF_HREF);
+    const objectUrls = new Set;
+    function isSelfOriginUrl2(u) {
+      return isSelfOriginUrl(u, SELF_BASE_DIR, SELF_HREF, objectUrls);
+    }
+    function isExternalUrl2(u) {
+      return isExternalUrl(u, SELF_BASE_DIR, SELF_HREF, objectUrls);
+    }
+    function normalizeToRelPath2(u) {
+      return normalizeToRelPath(u, SELF_BASE_DIR);
+    }
+    const URL_ATTRS = new Set([
+      "src",
+      "srcset",
+      "href",
+      "poster",
+      "action",
+      "formaction",
+      "data",
+      "background",
+      "cite",
+      "longdesc",
+      "usemap",
+      "manifest"
+    ]);
+    const URL_STYLE_PROPS = new Set([
+      "background",
+      "backgroundImage",
+      "background-image",
+      "borderImage",
+      "border-image",
+      "borderImageSource",
+      "border-image-source",
+      "listStyle",
+      "list-style",
+      "listStyleImage",
+      "list-style-image",
+      "cursor",
+      "mask",
+      "maskImage",
+      "mask-image",
+      "webkitMask",
+      "-webkit-mask",
+      "webkitMaskImage",
+      "-webkit-mask-image",
+      "content",
+      "src"
+    ]);
+    const __BLOB_CACHE_MAX = 256;
+    const __BLOB_REVOKE_DELAY_MS = 30000;
+    const blobCache = new Map;
+    const blobStats = {
+      created: 0,
+      revoked: 0,
+      hits: 0,
+      misses: 0,
+      inFlightRevokes: 0
+    };
+    function __evictIfOverCap() {
+      while (blobCache.size > __BLOB_CACHE_MAX) {
+        const oldestKey = blobCache.keys().next().value;
+        if (oldestKey === undefined)
+          break;
+        const ent = blobCache.get(oldestKey);
+        blobCache.delete(oldestKey);
+        blobStats.inFlightRevokes++;
+        const t = setTimeout(() => {
+          ent.url.then((u) => {
+            if (typeof u === "string" && u.startsWith("blob:")) {
+              try {
+                URL.revokeObjectURL(u);
+                blobStats.revoked++;
+              } catch {}
+            }
+          }).finally(() => {
+            blobStats.inFlightRevokes--;
+          });
+        }, __BLOB_REVOKE_DELAY_MS);
+        ent.pendingRevoke = t;
+      }
+    }
+    function resolveToBlobUrl(rel) {
+      if (isExternalUrl2(rel))
+        return Promise.resolve(rel);
+      const hashIdx = rel.indexOf("#");
+      const pathPart = hashIdx >= 0 ? rel.slice(0, hashIdx) : rel;
+      const frag = hashIdx >= 0 ? rel.slice(hashIdx) : "";
+      const key = normalizeToRelPath2(pathPart);
+      let ent = blobCache.get(key);
+      if (ent) {
+        if (ent.pendingRevoke != null) {
+          clearTimeout(ent.pendingRevoke);
+          ent.pendingRevoke = undefined;
+          blobStats.inFlightRevokes--;
+        }
+        blobCache.delete(key);
+        blobCache.set(key, ent);
+        blobStats.hits++;
+      } else {
+        blobStats.misses++;
+        const url = httpReq("GET", key, null).then((r) => {
+          const ctHeader = r.headers.find(([k]) => k.toLowerCase() === "content-type");
+          const ct = ctHeader?.[1] ?? "application/octet-stream";
+          const blob = new Blob([r.bytes], { type: ct });
+          blobStats.created++;
+          return URL.createObjectURL(blob);
+        });
+        ent = { url };
+        blobCache.set(key, ent);
+        __evictIfOverCap();
+      }
+      return frag ? ent.url.then((b) => b + frag) : ent.url;
+    }
+    const HATCH_PIXEL_PREFIX = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+    const HATCH_FRAG = "#hatch=";
+    function isHatchPlaceholder(url) {
+      return url.indexOf(HATCH_PIXEL_PREFIX + HATCH_FRAG) === 0;
+    }
+    function unwrapHatchPlaceholder(url) {
+      if (!isHatchPlaceholder(url))
+        return null;
+      return decodeURIComponent(url.slice((HATCH_PIXEL_PREFIX + HATCH_FRAG).length));
+    }
+    async function rewriteCssTextAsync(text) {
+      const re = /url\(\s*(['"]?)([^'")]+)\1\s*\)/g;
+      const tasks = [];
+      let m;
+      while ((m = re.exec(text)) !== null) {
+        tasks.push({ match: m[0], index: m.index, url: m[2].trim() });
+      }
+      if (tasks.length === 0)
+        return text;
+      const resolved = await Promise.all(tasks.map(async (t) => {
+        if (t.url.startsWith("blob:"))
+          return t.url;
+        const unwrapped = unwrapHatchPlaceholder(t.url);
+        if (unwrapped != null) {
+          try {
+            return await resolveToBlobUrl(unwrapped);
+          } catch {
+            return t.url;
+          }
+        }
+        if (isExternalUrl2(t.url))
+          return t.url;
+        try {
+          return await resolveToBlobUrl(t.url);
+        } catch {
+          return t.url;
+        }
+      }));
+      let out = "";
+      let last = 0;
+      tasks.forEach((t, i) => {
+        out += text.slice(last, t.index);
+        out += `url("${resolved[i]}")`;
+        last = t.index + t.match.length;
+      });
+      out += text.slice(last);
+      return out;
+    }
+    function rewriteCssText(text) {
+      return rewriteCssTextAsync(text);
+    }
+    const mediaSourceLoads = new WeakMap;
+    window.addEventListener("error", (event) => {
+      const source = event.target;
+      if (!event.isTrusted || !(source instanceof HTMLSourceElement) || !(source.parentElement instanceof HTMLMediaElement) || source.hasAttribute("src"))
+        return;
+      const state = mediaSourceLoads.get(source);
+      if (state === "pending" || state === undefined && source.hasAttribute("data-hatch-src")) {
+        event.stopImmediatePropagation();
+      }
+    }, true);
+    function isElement(el) {
+      if (el instanceof Element)
+        return true;
+      const ownerWindow = el?.ownerDocument?.defaultView;
+      return ownerWindow != null && el instanceof ownerWindow.Element;
+    }
+    function setAttr(el, name, value, ...rest) {
+      if (!isElement(el)) {
+        return el.setAttribute(name, value, ...rest);
+      }
+      name = String(name);
+      if (value == null) {
+        if (name.toLowerCase() === "src" && el instanceof HTMLSourceElement) {
+          mediaSourceLoads.set(el, "settled");
+        }
+        try {
+          el.removeAttribute(name);
+        } catch {}
+        return;
+      }
+      const v = String(value);
+      const lcName = name.toLowerCase();
+      const tag = el.tagName?.toUpperCase();
+      if ((tag === "A" || tag === "BASE" || tag === "AREA") && lcName === "href") {
+        el.setAttribute(name, v);
+        return;
+      }
+      if (!URL_ATTRS.has(lcName) && lcName !== "style" && lcName !== "srcset") {
+        el.setAttribute(name, v);
+        return;
+      }
+      if (lcName === "srcset") {
+        const parts = v.split(",").map((s) => s.trim()).filter(Boolean);
+        Promise.all(parts.map(async (p) => {
+          const segs = p.split(/\s+/);
+          const url = segs[0];
+          const rest = segs.slice(1).join(" ");
+          if (isExternalUrl2(url))
+            return p;
+          const resolved = await resolveToBlobUrl(url);
+          return rest ? `${resolved} ${rest}` : resolved;
+        })).then((rebuilt) => {
+          try {
+            el.setAttribute("srcset", rebuilt.join(", "));
+          } catch {}
+        });
+        return;
+      }
+      if (URL_ATTRS.has(lcName)) {
+        const isMediaSource = tag === "SOURCE" && lcName === "src";
+        if (isExternalUrl2(v)) {
+          if (isMediaSource)
+            mediaSourceLoads.set(el, "settled");
+          el.setAttribute(name, v);
+          return;
+        }
+        if (isMediaSource)
+          mediaSourceLoads.set(el, "pending");
+        if (tag === "IMG" || tag === "VIDEO" && lcName === "poster") {
+          el.setAttribute(name, TRANSPARENT_PIXEL);
+        }
+        resolveToBlobUrl(v).then((blobUrl) => {
+          if (isMediaSource)
+            mediaSourceLoads.set(el, "settled");
+          try {
+            el.setAttribute(name, blobUrl);
+            if (isMediaSource) {
+              const media = el.parentElement;
+              if (media instanceof HTMLMediaElement && media.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
+                const nextSibling = el.nextSibling;
+                el.remove();
+                media.insertBefore(el, nextSibling);
+              }
+            }
+          } catch {}
+        }, () => {
+          if (isMediaSource) {
+            mediaSourceLoads.set(el, "settled");
+            el.dispatchEvent(new Event("error"));
+          }
+        });
+        return;
+      }
+      if (lcName === "style") {
+        setStyleAttr(el, v);
+        return;
+      }
+      el.setAttribute(name, v);
+    }
+    function setAttrNS(el, ns, name, value, ...rest) {
+      if (!isElement(el)) {
+        return el.setAttributeNS(ns, name, value, ...rest);
+      }
+      name = String(name);
+      if (value == null) {
+        try {
+          el.removeAttributeNS(ns ?? null, name);
+        } catch {}
+        return;
+      }
+      const v = String(value);
+      const lcName = name.split(":").pop().toLowerCase();
+      if (lcName === "href" && URL_ATTRS.has("href")) {
+        if (isExternalUrl2(v)) {
+          el.setAttributeNS(ns ?? null, name, v);
+          return;
+        }
+        resolveToBlobUrl(v).then((blobUrl) => {
+          try {
+            el.setAttributeNS(ns ?? null, name, blobUrl);
+          } catch {}
+        }, () => {});
+        return;
+      }
+      try {
+        el.setAttributeNS(ns ?? null, name, v);
+      } catch {}
+    }
+    function setUrlProp(el, name, value) {
+      if (isElement(el)) {
+        setAttr(el, name.toLowerCase(), value);
+      } else {
+        el[name] = value;
+      }
+      return value;
+    }
+    const TRANSPARENT_PIXEL = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+    const HTML_TAG_ATTRS = {
+      img: ["src", "srcset", "poster"],
+      image: ["href"],
+      video: ["src", "poster"],
+      audio: ["src"],
+      source: ["src", "srcset"],
+      script: ["src"],
+      link: ["href"],
+      iframe: ["src"],
+      embed: ["src"],
+      object: ["data"],
+      track: ["src"],
+      input: ["src"],
+      form: ["action"],
+      button: ["formaction"],
+      use: ["href"]
+    };
+    function rewriteHtmlString(html) {
+      return html.replace(/<([a-zA-Z][a-zA-Z0-9-]*)\b([^>]*)>/g, (m, tag, attrs) => {
+        const lc = String(tag).toLowerCase();
+        const candidates = HTML_TAG_ATTRS[lc];
+        if (!candidates)
+          return m;
+        let out = attrs;
+        for (const a of candidates) {
+          const re = new RegExp(`\\b${a}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, "i");
+          const matched = out.match(re);
+          if (!matched)
+            continue;
+          const value = matched[2] ?? matched[3] ?? matched[4] ?? "";
+          if (isExternalUrl2(value))
+            continue;
+          out = out.replace(re, `data-hatch-${a}="${value.replace(/"/g, "&quot;")}"`);
+        }
+        const styleRe = /\bstyle\s*=\s*("([^"]*)"|'([^']*)')/i;
+        const sm = out.match(styleRe);
+        if (sm) {
+          const value = sm[2] ?? sm[3] ?? "";
+          if (value.includes("url(")) {
+            out = out.replace(styleRe, `data-hatch-style="${value.replace(/"/g, "&quot;")}"`);
+          }
+        }
+        return `<${tag}${out}>`;
+      });
+    }
+    const HTML_URL_ATTRS_BY_TAG = {
+      IMG: ["src", "srcset", "poster"],
+      IMAGE: ["href"],
+      VIDEO: ["src", "poster"],
+      AUDIO: ["src"],
+      SOURCE: ["src", "srcset"],
+      SCRIPT: ["src"],
+      LINK: ["href"],
+      IFRAME: ["src"],
+      EMBED: ["src"],
+      OBJECT: ["data"],
+      TRACK: ["src"],
+      INPUT: ["src"],
+      FORM: ["action"],
+      BUTTON: ["formaction"],
+      USE: ["href", "xlink:href"]
+    };
+    function rewriteSubtreeForTunnel(root) {
+      if (!root)
+        return;
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
+      let n = walker.currentNode;
+      if (root.nodeType === 1)
+        processOne(root);
+      while (n = walker.nextNode()) {
+        processOne(n);
+      }
+    }
+    function processOne(el) {
+      const tag = (el.tagName ?? "").toUpperCase();
+      const attrs = HTML_URL_ATTRS_BY_TAG[tag];
+      if (attrs) {
+        for (const a of attrs) {
+          const v = el.getAttribute(a);
+          if (v == null)
+            continue;
+          if (isExternalUrl2(v))
+            continue;
+          el.setAttribute("data-hatch-" + a, v);
+          el.removeAttribute(a);
+        }
+      }
+      const style = el.getAttribute("style");
+      if (style && style.includes("url(")) {
+        el.setAttribute("data-hatch-style", style);
+        el.removeAttribute("style");
+      }
+    }
+    function parseAndCleanHtml(html) {
+      const tpl = document.createElement("template");
+      tpl.innerHTML = html;
+      rewriteSubtreeForTunnel(tpl.content);
+      return tpl.content;
+    }
+    function setInnerHTML(el, html, which = "innerHTML") {
+      const s = html == null ? "" : String(html);
+      if (which === "innerHTML" && typeof el.tagName === "string" && el.tagName.toUpperCase() === "TEMPLATE") {
+        try {
+          el.innerHTML = s;
+        } catch {}
+        return;
+      }
+      if (which === "outerHTML") {
+        const frag = parseAndCleanHtml(s);
+        const wrap = document.createElement("div");
+        wrap.appendChild(frag);
+        try {
+          el.outerHTML = wrap.innerHTML;
+        } catch {}
+        queueMicrotask(() => processDataHatchAttrs(document.body));
+        return;
+      }
+      const frag = parseAndCleanHtml(s);
+      try {
+        while (el.firstChild)
+          el.removeChild(el.firstChild);
+        el.appendChild(frag);
+      } catch {}
+      queueMicrotask(() => processDataHatchAttrs(el));
+    }
+    function insertAdjacentHTMLT(el, position, html) {
+      const s = html == null ? "" : String(html);
+      const frag = parseAndCleanHtml(s);
+      const wrap = document.createElement("template");
+      wrap.content.appendChild(frag);
+      try {
+        el.insertAdjacentHTML(position, wrap.innerHTML);
+      } catch {}
+      queueMicrotask(() => processDataHatchAttrs(document.body));
+    }
+    function processDataHatchAttrs(root) {
+      const SELECTORS = "[data-hatch-src], [data-hatch-href], [data-hatch-srcset], [data-hatch-poster], [data-hatch-action], [data-hatch-data], [data-hatch-style]";
+      root.querySelectorAll(SELECTORS).forEach((el) => {
+        const attrs = el.getAttributeNames();
+        for (const a of attrs) {
+          if (!a.startsWith("data-hatch-"))
+            continue;
+          const real = a.slice("data-hatch-".length);
+          const value = el.getAttribute(a) ?? "";
+          el.removeAttribute(a);
+          if (real === "style")
+            setStyleAttr(el, value);
+          else
+            setAttr(el, real, value);
+        }
+      });
+    }
+    const styleProxyCache = new WeakMap;
+    function getStyle(el) {
+      if (el == null)
+        return el;
+      let real;
+      try {
+        real = el.style;
+      } catch {
+        return;
+      }
+      if (real == null || typeof real !== "object" && typeof real !== "function") {
+        return real;
+      }
+      let proxy = styleProxyCache.get(real);
+      if (proxy)
+        return proxy;
+      proxy = new Proxy(real, {
+        get(target, prop, _receiver) {
+          const v = Reflect.get(target, prop, target);
+          if (typeof v === "function")
+            return v.bind(target);
+          return v;
+        },
+        set(target, prop, value) {
+          if (typeof prop === "string") {
+            setStyle(el, prop, value);
+            return true;
+          }
+          return Reflect.set(target, prop, value, target);
+        }
+      });
+      styleProxyCache.set(real, proxy);
+      return proxy;
+    }
+    function setStyle(el, propName, value) {
+      const v = value == null ? "" : String(value);
+      if (propName.startsWith("--")) {
+        rewriteCssText(v).then((rewritten) => {
+          try {
+            el.style.setProperty(propName, rewritten);
+          } catch {}
+        });
+        return;
+      }
+      if (URL_STYLE_PROPS.has(propName) && v.includes("url(")) {
+        rewriteCssText(v).then((rewritten) => {
+          try {
+            el.style[propName] = rewritten;
+          } catch {}
+        });
+        return;
+      }
+      try {
+        el.style[propName] = v;
+      } catch {}
+    }
+    function setStyleAttr(el, attrValue) {
+      if (!attrValue.includes("url(")) {
+        el.setAttribute("style", attrValue);
+        return;
+      }
+      rewriteCssText(attrValue).then((rewritten) => {
+        try {
+          el.setAttribute("style", rewritten);
+        } catch {}
+      });
+    }
+    function setStyleText(styleEl, text) {
+      if (!(styleEl instanceof HTMLStyleElement)) {
+        try {
+          styleEl.textContent = text;
+        } catch {}
+        return;
+      }
+      if (!text.includes("url(")) {
+        styleEl.textContent = text;
+        return;
+      }
+      rewriteCssText(text).then((rewritten) => {
+        try {
+          styleEl.textContent = rewritten;
+        } catch {}
+      });
+    }
+    function tunnelImage(_w, _h) {
+      const img = new originalImage;
+      const desc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      if (desc?.set) {
+        const origSet = desc.set;
+        const origGet = desc.get;
+        Object.defineProperty(img, "src", {
+          configurable: true,
+          get() {
+            return origGet.call(img);
+          },
+          set(v) {
+            if (v == null)
+              return origSet.call(img, "");
+            const s = String(v);
+            if (isExternalUrl2(s))
+              return origSet.call(img, s);
+            resolveToBlobUrl(s).then((b) => origSet.call(img, b), () => origSet.call(img, s));
+          }
+        });
+      }
+      return img;
+    }
+    function tunnelSendBeacon(url, data) {
+      tunnelFetch(url, { method: "POST", body: data, keepalive: true }).catch(() => {});
+      return true;
+    }
+    function tunnelWorker(_url) {
+      throw new Error("[__tunnel] new Worker() is not supported in Muse web artifacts.");
+    }
+    function tunnelImport(spec) {
+      throw new Error("[__tunnel] dynamic import() of '" + String(spec) + "' is not supported in Muse web artifacts.");
+    }
+    function installCssObserver() {
+      try {
+        const proto = window.CSSStyleSheet?.prototype;
+        if (proto) {
+          const origInsertRule = proto.insertRule;
+          proto.insertRule = function(rule, index) {
+            if (typeof rule === "string" && rule.includes("url(")) {
+              const idx = origInsertRule.call(this, rule, index);
+              rewriteCssText(rule).then((rewritten) => {
+                if (rewritten !== rule) {
+                  try {
+                    this.deleteRule(idx);
+                    origInsertRule.call(this, rewritten, idx);
+                  } catch {}
+                }
+              });
+              return idx;
+            }
+            return origInsertRule.call(this, rule, index);
+          };
+          const origReplace = proto.replace;
+          if (origReplace) {
+            proto.replace = function(text) {
+              if (typeof text === "string" && text.includes("url(")) {
+                return rewriteCssText(text).then((rewritten) => origReplace.call(this, rewritten));
+              }
+              return origReplace.call(this, text);
+            };
+          }
+          const origReplaceSync = proto.replaceSync;
+          if (origReplaceSync) {
+            proto.replaceSync = function(text) {
+              if (typeof text === "string" && text.includes("url(")) {
+                const ret = origReplaceSync.call(this, text);
+                rewriteCssText(text).then((rewritten) => {
+                  try {
+                    origReplaceSync.call(this, rewritten);
+                  } catch {}
+                });
+                return ret;
+              }
+              return origReplaceSync.call(this, text);
+            };
+          }
+        }
+      } catch (e) {}
+      function sweepSheet(sheet) {
+        try {
+          const rules = sheet.cssRules;
+          for (let i = 0;i < rules.length; i++) {
+            const rule = rules[i];
+            const txt = rule.cssText;
+            if (txt && (txt.includes(HATCH_FRAG) || txt.includes("url(") && !/url\(\s*["']?(blob:|https?:|data:image\/gif;base64,R0)/.test(txt))) {
+              rewriteCssText(txt).then((rewritten) => {
+                if (rewritten !== txt) {
+                  try {
+                    sheet.deleteRule(i);
+                    sheet.insertRule(rewritten, i);
+                  } catch {}
+                }
+              });
+            }
+          }
+        } catch {}
+      }
+      function sweepAll() {
+        for (const sheet of Array.from(document.styleSheets)) {
+          sweepSheet(sheet);
+        }
+      }
+      const mo = new MutationObserver((mutations) => {
+        for (const m of mutations) {
+          for (const node of Array.from(m.addedNodes)) {
+            if (node instanceof HTMLStyleElement) {
+              const txt = node.textContent ?? "";
+              if (txt.includes("url(")) {
+                rewriteCssText(txt).then((rewritten) => {
+                  if (rewritten !== txt) {
+                    try {
+                      node.textContent = rewritten;
+                    } catch {}
+                  }
+                });
+              }
+            } else if (node instanceof HTMLLinkElement && node.rel === "stylesheet") {
+              node.addEventListener("load", () => sweepSheet(node.sheet), { once: true });
+            }
+          }
+        }
+      });
+      mo.observe(document, { subtree: true, childList: true });
+      Promise.resolve().then(sweepAll);
+      setTimeout(sweepAll, 0);
+      setTimeout(sweepAll, 50);
+      setTimeout(sweepAll, 250);
+    }
+    function rewriteAuthoredHtml() {
+      const SELECTORS = "[data-hatch-src], [data-hatch-href], [data-hatch-srcset]";
+      document.querySelectorAll(SELECTORS).forEach((el) => {
+        const src = el.getAttribute("data-hatch-src");
+        const href = el.getAttribute("data-hatch-href");
+        const srcset = el.getAttribute("data-hatch-srcset");
+        if (src)
+          setAttr(el, "src", src);
+        if (href)
+          setAttr(el, "href", href);
+        if (srcset)
+          setAttr(el, "srcset", srcset);
+      });
+    }
+    let historyUrlWarned = false;
+    function warnHistoryUrlDropped(method, url) {
+      if (url === undefined || url === null)
+        return;
+      if (historyUrlWarned)
+        return;
+      historyUrlWarned = true;
+      try {
+        console.warn("[__tunnel] history." + method + "() was called with a URL; the URL was ignored. A Muse web artifact " + "renders in an opaque origin with no navigable URL of its own, so " + "the browser rejects any URL change. State kept in the URL will not " + "persist or survive a reload — keep it in component state, or in " + "the artifact's database through a server action.");
+      } catch {}
+    }
+    const originalFetch = globalThis.fetch?.bind(globalThis) ?? (() => {
+      throw new Error("no native fetch");
+    });
+    const originalXHR = globalThis.XMLHttpRequest;
+    const originalImage = globalThis.Image;
+    const tunnel = {
+      fetch: tunnelFetch,
+      XHR: TunnelXHR,
+      WebSocket: TunnelWebSocket,
+      EventSource: TunnelEventSource,
+      Image: tunnelImage,
+      Worker: tunnelWorker,
+      import: tunnelImport,
+      sendBeacon: tunnelSendBeacon,
+      setAttr,
+      setAttrNS,
+      setUrlProp,
+      setStyle,
+      getStyle,
+      setStyleAttr,
+      setStyleText,
+      setInnerHTML,
+      insertAdjacentHTML: insertAdjacentHTMLT,
+      rewriteCssText,
+      resolveToBlobUrl,
+      processDataHatchAttrs,
+      rewriteHtmlString,
+      _resolveUrlString: (v) => v,
+      _resolveCssValue: (v) => v,
+      _resolveCssText: (v) => v,
+      _resolveStyleProp: (v) => v,
+      _importMeta: {
+        get url() {
+          return importMetaUrl(SELF_HREF, SELF_BASE_DIR);
+        }
+      },
+      _state: {
+        get port() {
+          return port;
+        },
+        get inFlight() {
+          return pending.size;
+        },
+        get blobCacheSize() {
+          return blobCache.size;
+        },
+        get blobStats() {
+          return { ...blobStats };
+        }
+      }
+    };
+    globalThis.__tunnel = tunnel;
+    window.__tunnel = tunnel;
+    try {
+      globalThis.fetch = tunnelFetch;
+      window.fetch = tunnelFetch;
+      globalThis.XMLHttpRequest = TunnelXHR;
+      window.XMLHttpRequest = TunnelXHR;
+      globalThis.WebSocket = TunnelWebSocket;
+      window.WebSocket = TunnelWebSocket;
+      globalThis.EventSource = TunnelEventSource;
+      window.EventSource = TunnelEventSource;
+      const nav = globalThis.navigator;
+      if (nav && typeof nav.sendBeacon === "function") {
+        nav.sendBeacon = (url, data) => tunnelSendBeacon(url, data);
+      }
+      const NativeURL = globalThis.URL;
+      const TunnelURL = function(url, base) {
+        return resolveTunnelUrl(url, base, SELF_HREF, NativeURL);
+      };
+      TunnelURL.prototype = NativeURL.prototype;
+      for (const k of Object.getOwnPropertyNames(NativeURL)) {
+        if (k === "prototype" || k === "length" || k === "name")
+          continue;
+        try {
+          TunnelURL[k] = NativeURL[k];
+        } catch {}
+      }
+      globalThis.URL = TunnelURL;
+      window.URL = TunnelURL;
+    } catch {}
+    try {
+      const hist = globalThis.history;
+      if (hist && typeof hist.pushState === "function" && typeof hist.replaceState === "function") {
+        const nativePushState = hist.pushState.bind(hist);
+        const nativeReplaceState = hist.replaceState.bind(hist);
+        hist.pushState = function(state, title, url) {
+          warnHistoryUrlDropped("pushState", url);
+          return nativePushState(state, title ?? "");
+        };
+        hist.replaceState = function(state, title, url) {
+          warnHistoryUrlDropped("replaceState", url);
+          return nativeReplaceState(state, title ?? "");
+        };
+      }
+    } catch {}
+    try {
+      const nativeCreateObjectURL = URL.createObjectURL.bind(URL);
+      const nativeRevokeObjectURL = URL.revokeObjectURL.bind(URL);
+      URL.createObjectURL = function(obj) {
+        const created = nativeCreateObjectURL(obj);
+        try {
+          objectUrls.add(created);
+        } catch {}
+        return created;
+      };
+      URL.revokeObjectURL = function(objectUrl) {
+        try {
+          objectUrls.delete(objectUrl);
+        } catch {}
+        nativeRevokeObjectURL(objectUrl);
+      };
+    } catch {}
+    const announceEpoch = Math.random().toString(36).slice(2) + "-" + Date.now().toString(36);
+    let announceTimer = null;
+    function announce() {
+      try {
+        window.parent.postMessage({ type: "bundle:ready", epoch: announceEpoch }, "*");
+      } catch {}
+    }
+    function startAnnouncing() {
+      announce();
+      announceTimer = setInterval(() => {
+        if (port != null) {
+          if (announceTimer != null)
+            clearInterval(announceTimer);
+          announceTimer = null;
+          return;
+        }
+        announce();
+      }, 120);
+    }
+    function onParentMessage(ev) {
+      const data = ev.data;
+      if (!data || typeof data !== "object")
+        return;
+      if (data.type === "bundle:init-port" && ev.ports && ev.ports[0]) {
+        if (port != null)
+          return;
+        if (announceTimer != null) {
+          clearInterval(announceTimer);
+          announceTimer = null;
+        }
+        port = ev.ports[0];
+        port.onmessage = (pe) => {
+          const msg = pe.data;
+          if (!msg || typeof msg !== "object")
+            return;
+          if (msg.type === "http.res") {
+            const ent = pending.get(msg.id);
+            if (ent) {
+              pending.delete(msg.id);
+              ent.resolve(msg);
+            }
+          } else if (msg.type === "ws.opened" || msg.type === "ws.message" || msg.type === "ws.closed" || msg.type === "ws.error") {
+            openWs.get(msg.id)?._handle(msg);
+          }
+        };
+        port.start?.();
+        portReadyResolve?.(port);
+        installCssObserver();
+        rewriteAuthoredHtml();
+        try {
+          window.parent.postMessage({ type: "bundle:port-attached" }, "*");
+        } catch {}
+      }
+    }
+    window.addEventListener("message", onParentMessage);
+    installDownloadLinks(tunnelFetch, isExternalUrl2, __BLOB_REVOKE_DELAY_MS);
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+      startAnnouncing();
+    } else {
+      document.addEventListener("DOMContentLoaded", startAnnouncing);
+    }
+  })();
+})();
+
+;
+"use strict";
+var CATS = {
+  "ChatGPT Design Post": {
+    color: "#1d5fd1",
+    inst: "Take the given quote/topic and design a short post with ChatGPT: paste the Loona Education logo, generate a relevant AI image on the quote/topic, keep every word free of spelling and grammar mistakes, and finish with a clean, professional design. Publish it publicly in the given format."
+  },
+  "AI Song Maker": {
+    color: "#17936a",
+    inst: "Write lyrics with AI on the given title/theme, turn them into a song with Suno AI, and make a music video of at least 1 minute with the lyrics and visuals properly synced to the song. Keep it ethical and family-friendly, and publish it publicly (Facebook / YouTube / LinkedIn / Instagram) with the complete lyrics in your post."
+  },
+  "ChatGPT Voice Session": {
+    color: "#0a8ea8",
+    inst: "Have a recorded or livestreamed voice conversation with ChatGPT on the given topic for at least 25 minutes, entirely in English. Start with a short introduction — your name, that you are a Loona Education student, the session title and its purpose — then publish the session publicly."
+  },
+  "TEDx Talk Review": {
+    color: "#d64545",
+    inst: "Watch the given TEDx Talk and record your review in English AND Urdu. Your review must be at least one-third of the talk's length (an 18-minute talk needs a 6-minute review). Record with camera ON and share it publicly, tagging the speaker."
+  },
+  "Story Writing Post": {
+    color: "#b7791f",
+    inst: "Write a short story on the given topic with ChatGPT — at least 4 paragraphs, in both English and Urdu, with a clear moral/lesson at the end. Generate one relevant AI image for the story and publish the post publicly."
+  },
+  "Facebook Mutual Friends": {
+    color: "#6d4fc2",
+    inst: "Send friend requests to people connected with the Loona Education community on Facebook. Once a request is accepted, take a clear screenshot showing your mutual friends and submit it."
+  },
+  "LinkedIn Mutual Friends": {
+    color: "#e84393",
+    inst: "Send connection requests on LinkedIn to people connected with the Loona Education community. Take a screenshot showing your mutual connections, then post it publicly or upload the screenshot and submit the link."
+  },
+  "Video Interview": {
+    color: "#c0392b",
+    inst: "Conduct a professional public interview on the given topic that shows your communication and active-listening skills. Camera ON, clear audio and video, a quiet place with no ads, countdowns or background music — and upload it publicly with a complete description."
+  },
+  "Canva Design Post": {
+    color: "#2e7d5b",
+    inst: "Design a professional poster in Canva from the given quote/topic with all the required elements: the quote, a relevant image and the Loona Education branding. Check carefully for spelling and grammar errors, then publish it publicly with a proper description."
+  },
+  "Sesame Voice Session": {
+    color: "#3454b4",
+    inst: "Have a recorded or livestreamed voice conversation with Sesame AI (or Call Annie) on the given topic for at least 25 minutes, entirely in English. Start with a short introduction and share the session publicly."
+  },
+  "Copilot Voice Session": {
+    color: "#f5821f",
+    inst: "Have a recorded or livestreamed voice conversation with Microsoft Copilot on the given topic for at least 25 minutes, entirely in English. Start with a short introduction and share the session publicly."
+  },
+  "My Testimonial Video": {
+    color: "#152639",
+    inst: "Record a short, natural testimonial video about your own experience at Loona Education: what you have learned, how the training is helping you, and what you liked most. Camera ON, clear and positive — upload it publicly."
+  },
+  "AI Coding Project": {
+    color: "#7a4a12",
+    inst: "Build a small coding project with AI help (Claude or ChatGPT — 'vibe coding'), then record a 1-3 minute demo: introduce yourself, explain what your project does, how it works and how to use it. Upload the demo publicly and submit both the project link and the video link."
+  }
+};
+var TOPICS = {
+  "ChatGPT Voice Session": ["Time Management in Daily Life", "Building a Personal Brand Online", "The Future of Teaching", "Speaking English with Confidence", "The Benefits of Reading Books", "Using AI in the Classroom", "Healthy Habits for Teachers", "The History of the Internet", "Starting a Small Business", "The Importance of Exercise", "Public Speaking Skills", "The Life of Quaid-e-Azam", "How Social Media Affects Students", "Saving Money Wisely", "The Art of Storytelling", "Climate Change and Our Future", "Famous Inventors and Their Ideas", "The Power of Positive Thinking", "Online Safety for Children", "The Importance of Teamwork"],
+  "ChatGPT Design Post": ["The Future of Education", "Automation and Creativity", "Teachers Are Nation Builders", "Learning Never Stops", "Technology with Heart", "Every Child Can Learn", "Books Open Minds", "Discipline Builds Success", "Knowledge Is Light", "Hard Work Beats Talent", "The Power of Reading", "Dream Big, Start Small", "Education Changes Lives", "Be a Lifelong Learner", "Kindness Is Strength", "Time Is Precious", "Curiosity Is the First Teacher", "Small Steps Every Day", "The Classroom of Tomorrow", "Gratitude Every Day"],
+  "AI Song Maker": ["Why Teachers Matter", "My School, My Pride", "The Love of Books", "Pakistan Zindabad", "Mother — A Blessing", "Friendship Forever", "Chasing My Dreams", "The Rainy Season", "A Farmer's Life", "The Digital World", "Ramadan Blessings", "Eid Celebrations", "The Honest Child", "Save the Environment", "My Village, My Home", "Learning Is Fun", "The Four Seasons", "Heroes of Our Land"],
+  "Story Writing Post": ["The Honest Shopkeeper", "The Clever Rabbit", "The Kind Woodcutter", "The Lost Key", "The Two Friends and the Bear", "The Thirsty Crow", "The Little Gardener", "The Brave Postman", "The Talking Parrot", "The Old Clock Tower", "The Generous Baker", "The Boy Who Loved Books", "The Mountain Village School", "The Helpful Stranger", "The Magic Pencil", "The Night Train Journey", "The Fisherman's Promise", "The Seed That Grew"],
+  "Canva Design Post": ["Reading Is Power", "Save Water, Save Life", "Clean and Green Pakistan", "Respect Your Teachers", "Honesty Is the Best Policy", "Health Is Wealth", "Say No to Plastic", "Plant a Tree Today", "Education for Every Child", "Unity, Faith, Discipline", "Keep Your City Clean", "The Library Is a Treasure", "Sports Keep You Fit", "Help the Needy", "Road Safety First", "Our Flag, Our Pride", "Books Are Best Friends", "Hard Work Always Pays"],
+  "Sesame Voice Session": ["Your Daily Routine", "Your Favourite Season", "A Trip to the Mountains", "My Dream Job", "The Food of Pakistan", "Learning a New Language", "Your Childhood Memories", "The Perfect Weekend", "Animals and Their Homes", "A Day Without a Mobile Phone", "Your Favourite Book", "City Life vs Village Life", "How to Stay Healthy", "Your Role Model", "Festivals Around the World", "The Ocean and Its Creatures", "Your Favourite Sport", "A Visit to the Zoo"],
+  "TEDx Talk Review": ["Do Schools Kill Creativity? — Sir Ken Robinson", "Your Body Language May Shape Who You Are — Amy Cuddy", "The Power of Introverts — Susan Cain", "Inside the Mind of a Master Procrastinator — Tim Urban", "How Great Leaders Inspire Action — Simon Sinek", "Grit: The Power of Passion and Perseverance — Angela Lee Duckworth", "The Happy Secret to Better Work — Shawn Achor", "What Makes a Good Life? — Robert Waldinger", "The Power of Vulnerability — Brené Brown", "How to Speak So That People Want to Listen — Julian Treasure", "Every Kid Needs a Champion — Rita Pierson", "Teach Teachers How to Create Magic — Christopher Emdin", "How to Fix a Broken School — Linda Cliatt-Wayman", "The Danger of a Single Story — Chimamanda Ngozi Adichie", "My Philosophy for a Happy Life — Sam Berns", "The Puzzle of Motivation — Dan Pink", "Why We Do What We Do — Tony Robbins", "Your Elusive Creative Genius — Elizabeth Gilbert"],
+  "Video Interview": ["AI's Impact on Education (Urdu)", "The Life of a School Teacher", "Why Reading Matters — A Librarian's View", "A Shopkeeper on Rising Prices", "A Student's Dream Career", "A Village Elder on Old Traditions", "A Doctor on Healthy Living", "A Mother on Raising Children", "A Farmer on Modern Farming", "A Driver on Road Safety", "A Young Entrepreneur's Story", "A Coach on Sports and Youth", "A Tailor's Craft and Hard Work", "A Nurse on Caring for Patients", "A Postman on Serving the Village", "A Head Teacher on School Discipline", "A Baker on Starting Early", "A Gardener on Patience and Growth"],
+  "Copilot Voice Session": ["Planning a Perfect Lesson", "Helping Students Who Struggle", "Making Homework Interesting", "Classroom Management Tips", "Using Pictures in Teaching", "Preparing Students for Exams", "Teaching Maths with Stories", "Encouraging Quiet Students", "Parent-Teacher Meetings", "Fun Activities for Friday", "Teaching English Grammar Easily", "Group Work in Class", "Using Maps and Charts", "Celebrating Student Success", "The First Day of School", "Ending the Term Well", "Storytelling in the Classroom", "Quick Revision Techniques"],
+  "AI Coding Project": ["Build a Simple Calculator App", "Build a To-Do List App", "Build a Personal Portfolio Page", "Build a Quiz App for Your Students", "Build a Digital Clock App", "Build a Word Counter Tool", "Build an Attendance Tracker", "Build a Marks Sheet Generator", "Build a Lesson Plan Helper", "Build a Vocabulary Flashcard App", "Build an Expense Tracker", "Build a Study Timer App", "Build a Class Notice Board Page", "Build a Simple Chatbot for FAQs", "Build a Student Progress Dashboard", "Build a Homework Planner App", "Build a School Timetable Maker", "Build a Fee Reminder Tool", "Build a Digital Library Catalogue", "Build an AI Study-Buddy Chatbot", "Build a Reading Quiz Maker with Timer", "Build a Parent-Teacher Message Generator", "Build a Class Reward Points Tracker", "Build an Exam Countdown Planner"]
+};
+var ROT = ["ChatGPT Voice Session", "ChatGPT Design Post", "Facebook Mutual Friends", "AI Song Maker", "Story Writing Post", "Canva Design Post", "Sesame Voice Session", "TEDx Talk Review", "Video Interview", "LinkedIn Mutual Friends", "Copilot Voice Session"];
+var CODING_DAYS = {
+  1: {
+    15: 1,
+    18: 1,
+    21: 1,
+    24: 1,
+    27: 1,
+    30: 1,
+    33: 1,
+    36: 1,
+    39: 1,
+    41: 1
+  },
+  2: {
+    10: 1,
+    11: 1,
+    12: 1,
+    14: 1,
+    15: 1,
+    16: 1,
+    18: 1,
+    19: 1,
+    20: 1,
+    22: 1,
+    23: 1,
+    24: 1,
+    26: 1,
+    27: 1,
+    28: 1,
+    30: 1,
+    31: 1,
+    32: 1,
+    34: 1,
+    35: 1,
+    36: 1,
+    38: 1,
+    39: 1,
+    40: 1,
+    41: 1
+  }
+};
+var FB_STEPS = [5, 10, 15, 20, 25, 30],
+  LI_STEPS = [5, 10, 15, 20];
+function dayCounts(base, up, down) {
+  var c = [],
+    i;
+  for (i = 0; i < 41; i++) c.push(base);
+  up.forEach(function (d) {
+    c[d - 1]++;
+  });
+  down.forEach(function (d) {
+    c[d - 1]--;
+  });
+  return c;
+}
+var TASKS = function () {
+  var all = [],
+    nextId = 1,
+    ptr = 0,
+    topicIdx = {},
+    fbI = 0,
+    liI = 0;
+  function nextTopic(cat) {
+    var pool = TOPICS[cat];
+    var i = topicIdx[cat] || 0;
+    topicIdx[cat] = i + 1;
+    var t = pool[i % pool.length];
+    if (i >= pool.length) t += " — Part " + (Math.floor(i / pool.length) + 1);
+    return t;
+  }
+  function make(day, level, cat) {
+    var title, desc, topic, n;
+    if (cat === "Facebook Mutual Friends") {
+      var cyc = Math.floor(fbI / FB_STEPS.length);
+      n = FB_STEPS[fbI % FB_STEPS.length];
+      fbI++;
+      title = "Add " + n + (cyc > 0 ? " More" : "") + " Mutual Friends on Facebook" + (cyc > 1 ? " · Round " + (cyc + 1) : "");
+      desc = "Send friend requests to " + n + " more people connected with the Loona Education community and submit the mutual-friends screenshot.";
+    } else if (cat === "LinkedIn Mutual Friends") {
+      var cyc2 = Math.floor(liI / LI_STEPS.length);
+      n = LI_STEPS[liI % LI_STEPS.length];
+      liI++;
+      title = "Add " + n + (cyc2 > 0 ? " More" : "") + " Mutual Friends on LinkedIn" + (cyc2 > 1 ? " · Round " + (cyc2 + 1) : "");
+      desc = "Send connection requests to " + n + " more people connected with the Loona Education community on LinkedIn and submit the mutual-connections screenshot.";
+    } else if (cat === "My Testimonial Video") {
+      title = "Record Your Loona Education Testimonial";
+      desc = "The final task of Level " + level + ": a short on-camera video about what you learned at Loona Education, how the training helped you, and what you liked most.";
+    } else {
+      topic = nextTopic(cat);
+      if (cat === "ChatGPT Voice Session") {
+        title = "Discuss " + topic;
+        desc = "Have a voice conversation with ChatGPT about " + topic + " and post the video on social media.";
+      } else if (cat === "ChatGPT Design Post") {
+        title = "Design a Post — " + topic;
+        desc = "Design a post with ChatGPT on the given quote — " + topic + " — and publish it publicly.";
+      } else if (cat === "AI Song Maker") {
+        title = "Create a Song — " + topic;
+        desc = "Write lyrics with AI on the theme " + topic + ", create the song in Suno AI and publish a synced music video of at least 1 minute.";
+      } else if (cat === "Story Writing Post") {
+        title = "Write a Story — " + topic;
+        desc = "A story of at least 4 paragraphs in English and Urdu — " + topic + " — ending with a clear moral, with one matching AI image.";
+      } else if (cat === "Canva Design Post") {
+        title = "Design a Canva Post — " + topic;
+        desc = "Design a professional Canva poster on " + topic + " and publish it publicly with a proper description.";
+      } else if (cat === "Sesame Voice Session") {
+        title = "Talk with Sesame — " + topic;
+        desc = "A 25-minute English voice conversation with Sesame AI about " + topic + ", recorded and shared publicly.";
+      } else if (cat === "TEDx Talk Review") {
+        title = "Review a TEDx Talk — " + topic;
+        desc = "Watch the talk and record your review in English and Urdu — at least one-third of the talk's length, camera ON.";
+      } else if (cat === "Video Interview") {
+        title = "Interview — " + topic;
+        desc = "Conduct a public interview on this topic with camera ON and clear audio, and upload it with a complete description.";
+      } else if (cat === "Copilot Voice Session") {
+        title = "Talk with Copilot — " + topic;
+        desc = "A 25-minute English voice conversation with Microsoft Copilot about " + topic + ", recorded and shared publicly.";
+      } else {
+        title = topic;
+        desc = "Build this project with AI help and record a 1-3 minute demo; submit the project link and the video link.";
+      }
+    }
+    all.push({
+      id: nextId++,
+      level: level,
+      day: day,
+      cat: cat,
+      title: title,
+      desc: desc,
+      status: "notstarted",
+      reviewer: ""
+    });
+  }
+  [{
+    level: 1,
+    counts: dayCounts(6, [3, 6, 10, 15, 19, 23, 28, 32, 37, 41], [5, 12, 18, 26, 34])
+  }, {
+    level: 2,
+    counts: dayCounts(5, [7, 13, 20, 24, 29, 33, 37, 40], [2, 4, 9, 11, 16, 18, 22, 27, 30, 35, 38, 41])
+  }].forEach(function (L) {
+    for (var d = 1; d <= 41; d++) {
+      var n = L.counts[d - 1],
+        cats = [],
+        k,
+        slots = n;
+      if (d === 41) slots--;
+      if (CODING_DAYS[L.level][d]) slots--;
+      for (k = 0; k < slots; k++) {
+        cats.push(ROT[ptr % ROT.length]);
+        ptr++;
+      }
+      if (CODING_DAYS[L.level][d]) cats.push("AI Coding Project");
+      if (d === 41) cats.push("My Testimonial Video");
+      cats.forEach(function (cat) {
+        make(d, L.level, cat);
+      });
+    }
+  });
+  var DELAYED = {
+    "ChatGPT Voice Session": 1,
+    "AI Song Maker": 1,
+    "Canva Design Post": 1
+  };
+  [1, 2].forEach(function (lv) {
+    var early = all.filter(function (t) {
+      return t.level === lv && t.day <= 5 && DELAYED[t.cat];
+    });
+    var late = all.filter(function (t) {
+      return t.level === lv && t.day > 5 && !DELAYED[t.cat] && t.cat !== "AI Coding Project" && t.cat !== "My Testimonial Video";
+    });
+    var li = 0;
+    early.forEach(function (t) {
+      var o = late[li++];
+      var sc = t.cat,
+        st = t.title,
+        sd = t.desc;
+      t.cat = o.cat;
+      t.title = o.title;
+      t.desc = o.desc;
+      o.cat = sc;
+      o.title = st;
+      o.desc = sd;
+    });
+  });
+  return all;
+}();
+var HELP = [["ChatGPT Design Post", "A short designed post from a given quote or topic, made with ChatGPT.", ["Take the given quote/topic", "Design the post with ChatGPT and paste the Loona Education logo", "Generate a relevant AI image on the quote/topic", "Check every word — no spelling or grammar mistakes", "Keep the design clean and professional", "Publish the post publicly"], ["Title: ChatGPT Design Post – #(number)", "The quote/topic", "1-2 line explanation (recommended)", "Tag Facilitator / Co-Facilitator / mentors", "Add 4-5 hashtags"], ["Relevant image", "No text errors", "Public post", "Proper description", "Required tags", "Relevant hashtags"]], ["AI Song Maker", "An AI song with a synced music video, on the given theme.", ["Write the lyrics with AI on the given title/theme", "Create the song with Suno AI", "Make a music video of at least 1 minute", "Sync the lyrics and visuals with the song", "Match the content to the given theme", "Keep it ethical and family-friendly", "Publish publicly (FB / YT / LinkedIn / IG)"], ["Title of the song", "Song Number", "Complete lyrics in the original language", "Tag Facilitator / mentors", "Add 4-5 hashtags"], ["AI-generated lyrics", "Video ≥ 1 min", "Lyrics/video synced", "Matches theme", "Ethical content", "No abusive language", "Public post", "Complete lyrics included"]], ["ChatGPT Voice Session", "A 25-minute spoken-English session with ChatGPT, recorded or live.", ["Open ChatGPT voice mode", "Start with a short introduction: name, Loona Education student, session title, purpose", "Talk on the given topic for at least 25 minutes", "Keep the whole conversation in English", "Livestream it, or record and upload", "Publish it publicly"], ["Title: AI Session with ChatGPT", "Topic + Episode Number", "3-4 lines of session insights", "Tag Facilitator / mentors", "Add 4-5 hashtags"], ["Minimum 25 minutes", "English only", "Short introduction", "Livestreamed or recorded", "Public post", "Topic + episode number", "Session insights", "Required tags"]], ["TEDx Talk Review", "Watch a TEDx Talk and record your own review in English and Urdu.", ["Watch the full TEDx Talk", "Note the key learnings in your own words", "Record your review in English AND Urdu", "Review length: at least 1/3 of the talk (18-min talk → 6-min review)", "Record with camera ON", "Share publicly and tag the speaker"], ["Talk title + speaker name", "Link to the original talk", "Your key learnings / personal review", "Tag Facilitator / mentors", "Add 4-5 hashtags"], ["Key learnings included", "Personal review", "Public post", "Original talk link", "Speaker tagged", "Required tags", "Relevant hashtags"]], ["Story Writing Post", "A short story written with ChatGPT, in English and Urdu, with a moral.", ["Take the given story topic", "Write the story with ChatGPT — at least 4 paragraphs", "Write it in both English and Urdu", "End with a clear moral/lesson", "Generate one relevant AI image", "Publish the post publicly"], ["Title + topic", "Full story (English + Urdu)", "The moral at the end", "Tag Facilitator / mentors", "Add 4-5 hashtags"], ["At least 4 paragraphs", "English + Urdu", "Clear moral", "Relevant image", "Public post", "Proper description"]], ["Facebook Mutual Friends", "Grow your network: connect with the Loona Education community on Facebook.", ["Find people connected with the Loona Education community", "Send them friend requests", "Wait for a request to be accepted", "Take a clear screenshot showing your mutual friends", "Submit the screenshot"], ["The mutual-friends screenshot", "How many friends you added", "Tag Facilitator / mentors"], ["Requests sent", "Request accepted", "Mutual friends visible", "Clear screenshot", "Submitted"]], ["LinkedIn Mutual Friends", "Connect with the Loona Education community on LinkedIn.", ["Find people connected with the Loona Education community on LinkedIn", "Send connection requests", "Take a screenshot showing your mutual connections", "Post it publicly or upload the screenshot", "Submit the link"], ["The mutual-connections screenshot or link", "How many connections you added", "Tag Facilitator / mentors"], ["Requests sent", "Mutual connections visible", "Clear screenshot", "Link submitted", "Public post"]], ["Video Interview", "A professional public interview that shows your communication skills.", ["Prepare your questions on the given topic", "Choose a quiet place with good light", "Keep camera ON with clear audio and video", "Listen actively — let your guest complete every answer", "No ads, countdowns or background music", "Upload publicly with a complete description"], ["Title: Interview — Topic", "Guest name + topic", "What was discussed (3-4 lines)", "Tag Facilitator / mentors", "Add 4-5 hashtags"], ["Minimum duration met", "Camera ON", "Clear audio/video", "Quiet environment", "No ads or music", "Complete description", "Uploaded publicly"]], ["Canva Design Post", "A professional Canva poster from the given quote or topic.", ["Take the given quote/topic", "Design the poster in Canva with the required elements", "Add a relevant image and Loona Education branding", "Check for spelling and grammar errors", "Publish it publicly with a proper description"], ["Title: Canva Design Post – #(number)", "The quote/topic", "1-2 line explanation (recommended)", "Tag Facilitator / Co-Facilitator / mentors", "Add 4-5 hashtags"], ["No spelling/grammar errors", "Professional design", "Published publicly", "Description written", "Tags added", "4-5 hashtags", "Link submitted"]], ["Sesame Voice Session", "A 25-minute spoken-English session with Sesame AI, recorded or live.", ["Open Sesame AI (or Call Annie)", "Start with a short introduction", "Talk on the given topic for at least 25 minutes", "Keep the whole conversation in English", "Record or livestream the session", "Share it publicly"], ["Title: Voice Session with Sesame", "Topic + Session Number", "3 points you learned", "Tag Facilitator / mentors", "Add 4-5 hashtags"], ["Minimum 25 minutes", "English only", "Short introduction", "Recorded or livestreamed", "Public post", "Proper description"]], ["Copilot Voice Session", "A 25-minute spoken-English session with Microsoft Copilot, recorded or live.", ["Open Microsoft Copilot voice mode", "Start with a short introduction", "Talk on the given topic for at least 25 minutes", "Keep the whole conversation in English", "Record or livestream the session", "Share it publicly"], ["Title: Voice Session with Copilot", "Topic + Session Number", "3 points you learned", "Tag Facilitator / mentors", "Add 4-5 hashtags"], ["Minimum 25 minutes", "English only", "Short introduction", "Recorded or livestreamed", "Public post", "Proper description"]], ["My Testimonial Video", "Your honest experience at Loona Education, on camera.", ["Think about what you have learned so far", "Note how the training is helping you", "Record naturally on camera — be clear and positive", "Mention what you liked the most", "Upload the video publicly"], ["Title: My Testimonial — Loona Education", "Your name + level", "2-3 lines about your experience", "Tag Facilitator / mentors", "Add 4-5 hashtags"], ["Camera ON", "Natural and clear", "Positive tone", "What you learned", "What you liked most", "Public upload"]], ["AI Coding Project", "Build a small project with AI help and demo it on video.", ["Pick the given project idea", "Build it with AI help (Claude / ChatGPT — vibe coding)", "Record a 1-3 minute demo video", "Introduce yourself: name, Loona Education student, your role", "Explain what the project does, how it works and how to use it", "Upload publicly and submit the project + video links"], ["Title + Coding Project Number", "2-3 lines describing the project", "Project link", "Video link", "Tag Facilitator / mentors + hashtags"], ["AI-built project", "1-3 minute demo", "Short introduction", "Project demonstrated", "Public upload", "Project link included", "Video link submitted"]]];
+var LOGS = [["Today", "Welcome to Loona Education — your classes, submissions and approvals will appear here", "Login", "—"]];
+function $(s, c) {
+  return (c || document).querySelector(s);
+}
+function $all(s, c) {
+  return Array.prototype.slice.call((c || document).querySelectorAll(s));
+}
+var toastTimer = null;
+function toast(msg) {
+  var t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () {
+    t.classList.remove("show");
+  }, 3200);
+}
+var TITLES = {
+  dashboard: "Dashboard",
+  classes: "Online Classes",
+  attendance: "Attendance",
+  announcements: "Announcements",
+  referral: "Referral Program",
+  payment: "Custom Payment",
+  certificates: "Certificates",
+  help: "Help",
+  feedback: "Feedback",
+  leaderboard: "Leaderboard",
+  activity: "Activity Log"
+};
+function goTo(name) {
+  if (name === "profile") {
+    openModal("#profileModal");
+    return;
+  }
+  $all(".section").forEach(function (s) {
+    s.classList.remove("active");
+  });
+  var sec = $("#sec-" + name);
+  if (sec) sec.classList.add("active");
+  $all("#mainNav button").forEach(function (b) {
+    b.classList.toggle("active", b.getAttribute("data-nav") === name);
+  });
+  $("#pageTitle").textContent = TITLES[name] || "Dashboard";
+  closeSidebar();
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+$all("#mainNav button").forEach(function (b) {
+  b.addEventListener("click", function () {
+    goTo(b.getAttribute("data-nav"));
+  });
+});
+$all("[data-goto]").forEach(function (el) {
+  el.addEventListener("click", function (e) {
+    e.preventDefault();
+    goTo(el.getAttribute("data-goto"));
+  });
+});
+function closeSidebar() {
+  $("#sidebar").classList.remove("open");
+  $("#scrim").classList.remove("on");
+}
+$("#hamburger").addEventListener("click", function () {
+  $("#sidebar").classList.add("open");
+  $("#scrim").classList.add("on");
+});
+$("#scrim").addEventListener("click", closeSidebar);
+$("#premiumBtn").addEventListener("click", function () {
+  toast("👑 Your Premium account is already active — full access to all features and tasks.");
+});
+$("#logoutBtn").addEventListener("click", function () {
+  toast("This is your Loona Education demo dashboard — you stay signed in here.");
+});
+var darkBtn = $("#darkToggle");
+function setDark(on) {
+  document.body.classList.toggle("dark", on);
+  darkBtn.textContent = on ? "☀️ Light Mode" : "🌙 Dark Mode";
+  __tunnel.setAttr(darkBtn, "aria-pressed", on ? "true" : "false");
+}
+if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) setDark(true);
+darkBtn.addEventListener("click", function () {
+  setDark(!document.body.classList.contains("dark"));
+});
+function openModal(sel) {
+  $(sel).classList.add("open");
+}
+function closeModals() {
+  $all(".modal-back").forEach(function (m) {
+    m.classList.remove("open");
+  });
+}
+$all("[data-close]").forEach(function (b) {
+  b.addEventListener("click", closeModals);
+});
+$all(".modal-back").forEach(function (m) {
+  m.addEventListener("click", function (e) {
+    if (e.target === m) closeModals();
+  });
+});
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    closeModals();
+    closeSidebar();
+  }
+});
+$("#changePhoto").addEventListener("click", function () {
+  $("#pfNote").textContent = "Photo upload opens on the full portal — your initials avatar is shown here.";
+});
+$("#editName").addEventListener("click", function () {
+  $("#pfNote").textContent = "Name updated for this session: " + ($("#pfName").value || "New Student");
+});
+$("#editEmail").addEventListener("click", function () {
+  $("#pfNote").textContent = $("#pfEmail").value ? "Email updated for this session." : "Please type an email first.";
+});
+$("#changePass").addEventListener("click", function () {
+  $("#pfNote").textContent = "For your security, password changes are confirmed by email on the full portal.";
+});
+var submittedCount = 0;
+function statusBadge(st) {
+  return st === "approved" ? '<span class="status st-approved">APPROVED</span>' : st === "pending" ? '<span class="status st-pending">PENDING REVIEW</span>' : '<span class="status st-notstarted">NOT STARTED</span>';
+}
+function renderTasks() {
+  var lvl = $("#fLevel").value,
+    day = $("#fDay").value,
+    cat = $("#fCat").value;
+  var lvlNum = parseInt(lvl, 10);
+  var lvlTasks = TASKS.filter(function (t) {
+    return t.level === lvlNum;
+  });
+  $("#approvedCount").textContent = lvlTasks.filter(function (t) {
+    return t.status === "approved";
+  }).length;
+  $("#pendingCount").textContent = lvlTasks.filter(function (t) {
+    return t.status === "pending";
+  }).length;
+  $("#tasksHint").textContent = lvlNum === 2 ? "Showing your Level 2 tasks — 201 tasks over 41 working days. Level 2 unlocks after Level 1 is complete; preview every day here, and finish Level 1 first." : "Showing your Level 1 tasks — 251 tasks over 41 working days. Start with Day 1 and work through them in order. Use the filters above to jump by day or category.";
+  var list = lvlTasks.filter(function (t) {
+    if (day !== "all" && t.day !== parseInt(day, 10)) return false;
+    if (cat !== "all" && t.cat !== cat) return false;
+    return true;
+  });
+  var html = list.map(function (t) {
+    var c = CATS[t.cat] || {
+      color: "#1d5fd1"
+    };
+    return '<div class="task"><div class="stripe" style="background:' + c.color + '"></div><div class="body">' + '<div class="t-top"><h4>Day ' + t.day + ": " + t.title + '</h4>' + statusBadge(t.status) + '</div>' + '<div class="cat">' + t.cat + '</div><p>' + t.desc + '</p>' + (t.status === "approved" ? '<span class="reviewer">Reviewed by ' + t.reviewer + '</span>' : "") + '<div class="actions"><button class="btn-outline" data-view="' + t.id + '">View Details</button>' + (t.status === "notstarted" ? '<button class="btn-submit" data-submit="' + t.id + '">Submit Task</button>' : "") + '</div></div></div>';
+  }).join("");
+  __tunnel.setInnerHTML($("#taskList"), html || '<p class="empty-note">No tasks match these filters. Try another day or category.</p>', "innerHTML");
+  $all("[data-view]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      openTask(parseInt(b.getAttribute("data-view"), 10));
+    });
+  });
+  $all("[data-submit]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      openSubmit(parseInt(b.getAttribute("data-submit"), 10));
+    });
+  });
+}
+function fillFilters() {
+  var lvl = parseInt($("#fLevel").value, 10);
+  var days = {},
+    cats = {};
+  TASKS.forEach(function (t) {
+    if (t.level === lvl) {
+      days[t.day] = 1;
+      cats[t.cat] = 1;
+    }
+  });
+  __tunnel.setInnerHTML($("#fDay"), '<option value="all">All Days</option>' + Object.keys(days).sort(function (a, b) {
+    return a - b;
+  }).map(function (d) {
+    return '<option value="' + d + '">Day ' + d + '</option>';
+  }).join(""), "innerHTML");
+  __tunnel.setInnerHTML($("#fCat"), '<option value="all">All Categories</option>' + Object.keys(cats).sort().map(function (c) {
+    return '<option value="' + c + '">' + c + '</option>';
+  }).join(""), "innerHTML");
+}
+["fDay", "fCat"].forEach(function (id) {
+  $("#" + id).addEventListener("change", renderTasks);
+});
+$("#fLevel").addEventListener("change", function () {
+  fillFilters();
+  renderTasks();
+});
+$("#goTasks").addEventListener("click", function () {
+  renderTasks();
+  $("#tasksCard").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
+fillFilters();
+renderTasks();
+$all("[data-book]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    $all("[data-book]").forEach(function (x) {
+      x.classList.remove("active");
+    });
+    b.classList.add("active");
+    if (b.getAttribute("data-book") === "2") {
+      __tunnel.setAttr($("#ringFg"), "stroke-dashoffset", "339.3");
+      $("#ringPct").textContent = "0%";
+      $("#statDone").textContent = "0";
+      $("#statRemain").textContent = "201";
+      $("#bookNote").textContent = "Book 2 · Level 2 (Advanced) — unlocks after Level 1 is complete. 0 of 201 tasks done.";
+    } else {
+      __tunnel.setAttr($("#ringFg"), "stroke-dashoffset", "339.3");
+      $("#ringPct").textContent = "0%";
+      $("#statDone").textContent = "0";
+      $("#statRemain").textContent = "251";
+      $("#bookNote").textContent = "Book 1 · Level 1 (Foundation) — 0 of 251 tasks approved. Start with your Day 1 tasks.";
+    }
+  });
+});
+var currentTask = null;
+function openTask(id) {
+  var t = TASKS.filter(function (x) {
+    return x.id === id;
+  })[0];
+  if (!t) return;
+  currentTask = t;
+  $("#tmDay").textContent = "Day " + t.day;
+  $("#tmLevel").textContent = "Level " + t.level;
+  $("#tmCat").textContent = t.cat;
+  $("#tmTitle").textContent = t.title;
+  $("#tmDesc").textContent = t.desc;
+  $("#tmInst").textContent = (CATS[t.cat] || {}).inst || "";
+  __tunnel.setStyle($("#tmSubmitBtn"), "display", t.status === "notstarted" ? "" : "none");
+  openModal("#taskModal");
+}
+$("#tmSubmitBtn").addEventListener("click", function () {
+  closeModals();
+  if (currentTask) openSubmit(currentTask.id);
+});
+function openSubmit(id) {
+  var t = TASKS.filter(function (x) {
+    return x.id === id;
+  })[0];
+  if (!t) return;
+  currentTask = t;
+  $("#smTitle").textContent = "Day " + t.day + " · " + t.cat + " — " + t.title;
+  $("#smError").textContent = "";
+  openModal("#submitModal");
+}
+$("#smDesc").addEventListener("input", function () {
+  $("#smCount").textContent = this.value.length;
+});
+$("#smSubmit").addEventListener("click", function () {
+  var desc = $("#smDesc").value.trim();
+  var hasLink = $("#smFb").value.trim() || $("#smYt").value.trim() || $("#smLi").value.trim();
+  var probChecked = $all(".sm-prob").some(function (c) {
+    return c.checked;
+  });
+  if (!hasLink && !probChecked) {
+    $("#smError").textContent = "Add at least one post link — or tick a platform-problem box and explain.";
+    return;
+  }
+  if (probChecked && $("#smProbText").value.trim().length < 15) {
+    $("#smError").textContent = "Please explain the platform problem in at least 15 characters.";
+    return;
+  }
+  if (desc.length < 30) {
+    $("#smError").textContent = "Description needs at least 30 characters — paste the same caption you posted.";
+    return;
+  }
+  if (currentTask) {
+    currentTask.status = "pending";
+    submittedCount++;
+    $("#pendingCount").textContent = submittedCount;
+    $("#statPending").textContent = submittedCount;
+  }
+  closeModals();
+  renderTasks();
+  $("#smFb").value = $("#smYt").value = $("#smLi").value = $("#smDesc").value = $("#smProbText").value = "";
+  $all(".sm-prob").forEach(function (c) {
+    c.checked = false;
+  });
+  $("#smCount").textContent = "0";
+  toast("✅ Task submitted! It is now PENDING REVIEW by your facilitator.");
+});
+__tunnel.setInnerHTML($("#helpList"), HELP.map(function (h, i) {
+  var need = h[2].map(function (x) {
+    return "<li>" + x + "</li>";
+  }).join("");
+  var post = h[3].map(function (x) {
+    return "<li>" + x + "</li>";
+  }).join("");
+  var chips = h[4].map(function (x) {
+    return "<span>✓ " + x + "</span>";
+  }).join("");
+  return '<div class="help-item' + (i === 0 ? " open" : "") + '"><button class="help-head" aria-expanded="' + (i === 0) + '"><span class="play">▶</span><span><b>' + (i + 1) + ". " + h[0] + '</b><small>' + h[1] + '</small></span><span class="chev">▾</span></button>' + '<div class="help-body"><h5>WHAT YOU NEED TO DO</h5><ul>' + need + '</ul><h5>HOW TO WRITE YOUR POST</h5><ul>' + post + '</ul><h5>FINAL CHECKLIST</h5><div class="check-chips">' + chips + '</div><p class="hint" style="margin-top:10px">Tutorial video: most task types show “No tutorial available” yet — follow the written steps above exactly.</p></div></div>';
+}).join(""), "innerHTML");
+$all(".help-head").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var item = b.parentElement,
+      open = item.classList.toggle("open");
+    __tunnel.setAttr(b, "aria-expanded", open);
+  });
+});
+$("#guideBtn").addEventListener("click", function () {
+  var txt = "LOONA EDUCATION — LEVEL 1 TASKS & RUBRICS GUIDE\n==============================================\n\n";
+  HELP.forEach(function (h, i) {
+    txt += i + 1 + ". " + h[0].toUpperCase() + "\n" + h[1] + "\nWhat you need to do:\n- " + h[2].join("\n- ") + "\nFinal checklist:\n- " + h[4].join("\n- ") + "\n\n";
+  });
+  var a = document.createElement("a");
+  __tunnel.setUrlProp(a, "href", URL.createObjectURL(new Blob([txt], {
+    type: "text/plain"
+  })));
+  a.download = "Loona-Education-Level-1-Guide.txt";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("Guide downloaded — keep it beside you while doing tasks.");
+});
+$("#browseFac").addEventListener("click", function () {
+  var f = $("#facList");
+  __tunnel.setStyle(f, "display", f.style.display === "none" ? "" : "none");
+});
+$all(".fac-pick").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var name = b.closest(".stat").querySelector("b").textContent;
+    $("#facChosen").textContent = "✓ " + name + " selected as your facilitator for this session. They will review your tasks and guide your classes.";
+    toast("Facilitator selected: " + name);
+  });
+});
+function tickClock() {
+  var d = new Date();
+  var h = d.getHours(),
+    m = ("0" + d.getMinutes()).slice(-2),
+    ap = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+  $("#clockNow").textContent = "Current Time: " + h + ":" + m + " " + ap + " (PKT)";
+}
+tickClock();
+setInterval(tickClock, 30000);
+$all("[data-att]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    $all("[data-att]").forEach(function (x) {
+      x.classList.remove("active");
+    });
+    b.classList.add("active");
+    ["today", "history", "leave"].forEach(function (k) {
+      __tunnel.setStyle($("#att-" + k), "display", k === b.getAttribute("data-att") ? "" : "none");
+    });
+  });
+});
+var checkedIn = false;
+$("#checkInBtn").addEventListener("click", function () {
+  if (checkedIn) {
+    toast("You are already checked in for today's class.");
+    return;
+  }
+  checkedIn = true;
+  this.textContent = "✓ Checked In — Present";
+  $("#attTodayText").textContent = "You are marked PRESENT for today's class (08:00 – 10:00 PM). Enjoy the session!";
+  var emptyRow = $("#attEmptyRow");
+  if (emptyRow) emptyRow.remove();
+  var d = new Date();
+  var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    mons = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var row = document.createElement("tr");
+  __tunnel.setInnerHTML(row, "<td>" + days[d.getDay()] + ", " + d.getDate() + " " + mons[d.getMonth()] + " " + d.getFullYear() + '</td><td>08:00 – 10:00 PM</td><td><span class="status st-approved">PRESENT</span></td>', "innerHTML");
+  $("#attHistoryBody").insertBefore(row, $("#attHistoryBody").firstChild);
+  toast("Attendance marked — you are PRESENT for today's class.");
+});
+$("#leaveBtn").addEventListener("click", function () {
+  if (!$("#leaveDate").value || !$("#leaveReason").value.trim()) {
+    $("#leaveNote").textContent = "Please pick a date and write a short reason.";
+    return;
+  }
+  $("#leaveNote").textContent = "✓ Leave requested for " + $("#leaveDate").value + " — your facilitator will review it.";
+  toast("Leave request sent to your facilitator.");
+});
+function copyText(txt, msg) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(function () {
+      toast(msg);
+    }, function () {
+      toast(txt);
+    });
+  } else toast(txt);
+}
+$("#copyCodeBtn").addEventListener("click", function () {
+  copyText($("#refCode").textContent, "Referral code copied: " + $("#refCode").textContent);
+});
+$("#shareBtn").addEventListener("click", function () {
+  var msg = "Join Loona Education — AI Teachers Training — with my referral code " + $("#refCode").textContent + " and start your Level 1 journey!";
+  copyText(msg, "Invitation copied — paste it anywhere to share.");
+  $("#shareNote").textContent = "Invitation text copied. Paste it on Facebook, WhatsApp or anywhere to invite a fellow teacher.";
+});
+$("#payBtn").addEventListener("click", function () {
+  var amt = parseFloat($("#payAmount").value),
+    card = $("#payCard").value.replace(/\s/g, "");
+  if (!amt || amt < 1 || amt > 10000) {
+    $("#payNote").textContent = "⚠ Enter an amount between $1 and $10,000.";
+    return;
+  }
+  if (card.length < 12) {
+    $("#payNote").textContent = "⚠ Please enter a valid card number.";
+    return;
+  }
+  $("#payNote").textContent = "✓ Demo payment of $" + amt.toFixed(2) + " recorded for this session. No real charge was made.";
+  toast("Demo payment recorded — $" + amt.toFixed(2));
+});
+var fbCount = 0;
+$("#fbBtn").addEventListener("click", function () {
+  if (!$("#fbSubject").value.trim() || !$("#fbDesc").value.trim()) {
+    $("#fbNote").textContent = "Please fill the Subject and Description fields.";
+    return;
+  }
+  fbCount++;
+  if (fbCount === 1) __tunnel.setInnerHTML($("#fbList"), "", "innerHTML");
+  var div = document.createElement("div");
+  div.className = "task";
+  __tunnel.setStyle(div, "marginBottom", "10px");
+  __tunnel.setInnerHTML(div, '<div class="stripe" style="background:var(--blue)"></div><div class="body"><div class="t-top"><h4>' + $("#fbSubject").value.replace(/</g, "&lt;") + '</h4><span class="status st-pending">OPEN</span></div><div class="cat">' + $("#fbType").value + '</div><p>' + $("#fbDesc").value.replace(/</g, "&lt;") + '</p></div>', "innerHTML");
+  $("#fbList").appendChild(div);
+  $("#lbTotal").textContent = fbCount;
+  $("#lbWeek").textContent = fbCount;
+  $("#lbRank").textContent = "#4";
+  $("#lbYouTotal").textContent = fbCount;
+  $("#lbYouWeek").textContent = fbCount;
+  $("#fbSubject").value = "";
+  $("#fbDesc").value = "";
+  $("#fbNote").textContent = "✓ Feedback submitted. Shukriya! Quality feedback helps you climb the scoreboard.";
+  toast("Feedback submitted — thank you!");
+});
+function renderLogs() {
+  var q = $("#logSearch").value.toLowerCase(),
+    ty = $("#logType").value;
+  __tunnel.setInnerHTML($("#logBody"), LOGS.filter(function (l) {
+    return (ty === "all" || l[2] === ty) && (l[1].toLowerCase().indexOf(q) > -1 || l[3].toLowerCase().indexOf(q) > -1);
+  }).map(function (l) {
+    return "<tr><td>" + l[0] + "</td><td>" + l[1] + "</td><td>" + l[2] + "</td><td>" + l[3] + "</td></tr>";
+  }).join("") || '<tr><td colspan="4">No activities match your filters.</td></tr>', "innerHTML");
+}
+$("#logSearch").addEventListener("input", renderLogs);
+$("#logType").addEventListener("change", renderLogs);
+renderLogs();
+$("#exportBtn").addEventListener("click", function () {
+  var csv = "Time,Activity,Type,Platform\n" + LOGS.map(function (l) {
+    return l.map(function (c) {
+      return '"' + c.replace(/"/g, '""') + '"';
+    }).join(",");
+  }).join("\n");
+  var a = document.createElement("a");
+  __tunnel.setUrlProp(a, "href", URL.createObjectURL(new Blob([csv], {
+    type: "text/csv"
+  })));
+  a.download = "loona-activity-log.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("Activity log exported as CSV.");
+});
+var ASSISTANT_WEBHOOK_URL = "";
+var QA = [[/submit|jama|task.*send/, "To submit a task: open it from Your Tasks → tap “Submit Task” → paste your Facebook / YouTube / LinkedIn post link (each task needs a UNIQUE link) → paste the SAME description you wrote on your post (min 30 characters) → Submit. It then shows as PENDING REVIEW until your facilitator approves it."], [/certificate|sanad/, "Your Level 1 certificate unlocks at 100% — all 251 Level 1 tasks approved. You are just starting out (0 of 251 approved), so begin with your Day 1 tasks. Level 2's certificate needs all 201 Level 2 tasks. See the Certificates section for live progress."], [/class|timing|time|lecture|batch/, "Online classes run Monday to Friday in the evening, Batch 1. Open the Attendance section and tap Check In when your class starts. First, pick your facilitator from Online Classes → Browse Facilitators."], [/referral|refer|invite|dost/, "Referral Program: share your code LOONA-STUDENT-1 (Referral Program section → Share Invitation). For every teacher who joins successfully with your code, you earn 7 days of FREE premium access."], [/progress|percent|status|kitn/, "Your progress: Level 1 is 0% complete — 0 of 251 tasks approved so far. Start with the Day 1 tasks in Your Tasks below. Level 2 is 0 of 201 and unlocks after Level 1."], [/premium|price|fees|payment|pay|pais/, "Your Premium account is ACTIVE — full access to all features and tasks. To pay pending fees, use Custom Payment (USD $1–$10,000 by card). Referrals also earn you free premium days."], [/attendance|hazri|present/, "Attendance: classes are Mon–Fri in the evening. Open Attendance → Today tab → Check In when class starts. The History tab shows your record, and the Leave tab lets you request leave with a date and reason."], [/task.*(type|kind)|help|guide|rubric|seekh|how to do|kaise/, "Open the Help section — it has the full guide for all 13 task types (ChatGPT Design Post, AI Song Maker, ChatGPT Voice Session, TEDx Talk Review, Story Writing Post, Facebook Mutual Friends, LinkedIn Mutual Friends, Video Interview, Canva Design Post, Sesame Voice Session, Copilot Voice Session, My Testimonial Video, AI Coding Project): what to do, how to write the post, and the reviewer's final checklist for each."], [/song|gana|music|suno/, "AI Song Maker: write the lyrics with AI on the given theme → create the song in Suno AI → make a music video of at least 1 minute with the lyrics and visuals properly synced → keep it ethical and family-friendly → publish publicly with the complete lyrics in your post. Full checklist: Help → AI Song Maker."], [/interview|video|record|testimonial|tedx/, "Video tasks (Video Interview, My Testimonial Video, TEDx Talk Review): camera ON, clear audio and video, a quiet place with no ads or background music, and a complete description when you upload publicly. Your first Video Interview — AI's Impact on Education, in Urdu — is waiting for you on Day 2 in Your Tasks, and your Testimonial Video is the very last task of each level (Day 41)."], [/canva|poster|design post/, "Canva Design Post: design the poster in Canva from the given quote/topic with the required elements and Loona Education branding → check every spelling → publish publicly with a proper description and 4-5 hashtags. For a ChatGPT-made design, see the ChatGPT Design Post task type. Details: Help → Canva Design Post."], [/chatgpt|talk|voice|speaking|sesame|copilot/, "Voice sessions (with ChatGPT, Sesame or Copilot): open the AI voice mode, start with a short introduction — your name, that you are a Loona Education student, and the session title — then talk in English on the given topic for at least 25 minutes. Record or livestream it, post it publicly, and add the topic, episode number and 3-4 lines of insights."], [/feedback|issue|problem|masla/, "Use the Feedback section to report an issue or suggest an improvement — pick the type, add a subject and description, attach a screenshot if helpful. Good feedback also climbs the Feedback Scoreboard in the Leaderboard section."], [/level 2|book 2|agla level/, "Level 2 (Book 2) has 201 tasks and unlocks when Level 1 is fully complete. Finish your Level 1 tasks first (251 in total) — your certificate is waiting at 100%."], [/leaderboard|score|rank/, "The Leaderboard here is the Feedback Scoreboard: it ranks students by feedback submitted and implemented. Submit quality feedback from the Feedback section to climb it — top contributors earn Golden and Silver rewards."], [/facilitator|teacher|mentor|ustad/, "Your facilitators review your tasks and run your live classes. Pick or change yours in Online Classes → Browse Facilitators. The Loona Facilitators and Mentors Team will review your tasks as you submit them."], [/salam|hello|hi\b|aoa|assalam/, "Wa Alaikum Assalam! Welcome to Loona Education — you are at the very start of Level 1. Ask me about submitting a task, your certificate, classes or referrals."]];
+function assistantAnswer(q) {
+  var s = q.toLowerCase();
+  for (var i = 0; i < QA.length; i++) {
+    if (QA[i][0].test(s)) return QA[i][1];
+  }
+  return "I can guide you on: submitting a task, your progress (0% — 0/251), certificates, classes (Mon–Fri, evenings), attendance, referrals, payments and all 13 task types in the Help section. Try one of the quick questions above, or ask in your own words.";
+}
+function addMsg(text, who) {
+  var box = $("#assistantMsgs");
+  var d = document.createElement("div");
+  d.className = "msg " + who;
+  d.textContent = text;
+  box.appendChild(d);
+  box.scrollTop = box.scrollHeight;
+}
+$("#assistantForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var inp = $("#assistantInput");
+  var q = inp.value.trim();
+  if (!q) return;
+  addMsg(q, "user");
+  inp.value = "";
+  var ans = assistantAnswer(q);
+  if (ASSISTANT_WEBHOOK_URL) {}
+  setTimeout(function () {
+    addMsg(ans, "bot");
+  }, 250);
+});
+$all("#assistantChips button").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var q = b.getAttribute("data-q");
+    addMsg(q, "user");
+    setTimeout(function () {
+      addMsg(assistantAnswer(q), "bot");
+    }, 250);
+  });
+});
+function showDashboard() {
+  $("#landing").classList.add("app-hidden");
+  $("#appShell").classList.remove("app-hidden");
+  window.scrollTo({
+    top: 0
+  });
+}
+function showLanding() {
+  $("#appShell").classList.add("app-hidden");
+  $("#landing").classList.remove("app-hidden");
+  closeSidebar();
+  window.scrollTo({
+    top: 0
+  });
+}
+$all("[data-enter]").forEach(function (b) {
+  b.addEventListener("click", showDashboard);
+});
+$("#viewSiteBtn").addEventListener("click", showLanding);</script>
+</body>
+</html>
